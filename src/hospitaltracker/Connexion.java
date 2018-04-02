@@ -28,6 +28,7 @@ public class Connexion {
     private Statement stmt;
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
+    private int coucou;
     /**
      * ArrayList public pour les tables
      */
