@@ -1,6 +1,6 @@
-package jdbcv2018;
+package modele;
 
-import com.jcraft.jsch.*;
+import lib.com.jcraft.jsch;
 
 /**
  * Etablit une connexion au serveur de la base de données via un tunnel SSH
