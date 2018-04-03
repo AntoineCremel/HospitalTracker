@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vue;
 
+import javax.swing.JFrame;
 /**
- *
- * @author Antoine
+ * Contient la classe Fenetre qui sert de base à l'interface graphique.
  */
-public class Fenetre {
+public class Fenetre extends JFrame{
+    // Variables
     
+    // Constructeurs
+    public Fenetre()
+    {
+        
+    }
 }
