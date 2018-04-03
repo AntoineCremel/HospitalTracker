@@ -1,6 +1,6 @@
 package modele;
 
-import lib.com.jcraft.jsch;
+import lib.com.jcraft.jsch.*;
 
 /**
  * Etablit une connexion au serveur de la base de données via un tunnel SSH
