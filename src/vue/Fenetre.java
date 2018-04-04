@@ -10,6 +10,11 @@ public class Fenetre extends JFrame{
     // Constructeurs
     public Fenetre()
     {
-        
+        super();
+        this.setTitle("HospitalTracker");
+        this.setSize(400, 400);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
 }
