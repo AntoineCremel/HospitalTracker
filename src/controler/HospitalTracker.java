@@ -18,4 +18,6 @@ public class HospitalTracker {
         // TODO code application logic here
     }
     
+    // Methodes 
+    
 }
