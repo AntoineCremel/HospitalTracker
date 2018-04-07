@@ -5,19 +5,50 @@
  */
 package controler;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import vue.Fenetre;
+
 /**
  *
  * @author Antoine
  */
-public class HospitalTracker {
-
+public class HospitalTracker implements ActionListener{
+    private Fenetre fen = new Fenetre();
+    
+    public HospitalTracker(Fenetre fen){
+        this.fen = fen;
+        this.fen.getLog().addActionListener(this);
+        this.fen.getModif().addActionListener(this);
+        this.fen.getRecherche().addActionListener(this);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource().equals(fen.getLog())){ //Si on appuie sur login
+            fen.nextContenu(1);
+        }
+        if(ae.getSource().equals(fen.getModif())){ //modifier
+            fen.nextContenu(3);
+        }
+        if(ae.getSource().equals(fen.getRecherche())){//recherche
+            fen.nextContenu(2);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Fenetre fen = new Fenetre();
+        HospitalTracker a = new HospitalTracker(fen);
+        fen.affiche();
+        
     }
     
     // Methodes 
+
+    
     
 }
