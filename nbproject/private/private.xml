@@ -6,7 +6,11 @@
             <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/controler/HospitalTracker.java</file>
             <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/vue/Fenetre.java</file>
             <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/modele/Connexion.java</file>
+            <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/controler/EcritureBDD.java</file>
+            <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/controler/NullQueryException.java</file>
             <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/modele/SSHTunnel.java</file>
+            <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/controler/AmbivalentQueryException.java</file>
+            <file>file:/D:/Etudes/Programing/Java/HospitalTracker/src/controler/LectureBDD.java</file>
         </group>
     </open-files>
 </project-private>
