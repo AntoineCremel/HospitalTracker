@@ -63,7 +63,9 @@ abstract class LectureBDD {
         ArrayList retour;
         
         // 1 Composition de la requête
-        requete = "SELECT * FROM `employe` WHERE `nom`=" + nomDocteur;
+        requete = "SELECT * FROM `employe` WHERE `nom`=" + nomDocteur +
+                "INNER JOIN `docteur` ON `employe`.`numero` = `docteur`" + 
+                ".`numero`";
         
         // 2 Executioon et récupération du résultat
         retour = connex.remplirChampsRequete(requete);
@@ -91,5 +93,19 @@ abstract class LectureBDD {
         retour = connex.remplirChampsRequete(requete);
         
         return retour;
+    }
+    // Fonctions d'erreur
+    public static void assertSingle(ArrayList<ArrayList<String>> queryResponse)
+            throws AmbivalentQueryException, NullQueryException
+    {
+        /*
+        Fonction chargée de vérifier que le résultat renvoyé ne comporte qu'une
+        seule ligne.
+        */
+        
+        if(queryResponse.size() > 1)
+            throw new AmbivalentQueryException();
+        else if(queryResponse.isEmpty())
+            throw new NullQueryException();
     }
 }

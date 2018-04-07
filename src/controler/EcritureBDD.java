@@ -51,30 +51,19 @@ abstract class EcritureBDD {
         String requete;
         int IDDocteur;
         int IDMalade;
-        List<List<String>> lecture;
+        ArrayList<ArrayList<String>> lecture;
         // Recuperation des IDs du patient et du docteur
         // Récupération de l'ID du docteur
         lecture = new ArrayList<>
             (LectureBDD.docteurByName(connex, nomDocteur));
-        if(lecture.size() == 1)
-            IDDocteur = Integer.parseInt(lecture.get(0).get(0));
-        else if(lecture.size() > 1)
-            throw new AmbivalentQueryException
-                ("Plus d'un docteur porte ce nom");
-        else
-            throw new NullQueryException
-                ("Aucun docteur avec ce nom");
+        LectureBDD.assertSingle(lecture);
+        IDDocteur = Integer.parseInt(lecture.get(0).get(0));
+        
         // Récupération de l'ID du patient
         lecture = new ArrayList<>
             (LectureBDD.patientByName(connex, nomPatient));
-        if(lecture.size() == 1)
-            IDMalade = Integer.parseInt(lecture.get(0).get(0));
-        else if(lecture.size() > 1)
-            throw new AmbivalentQueryException
-                ("Plus d'un docteur porte ce nom");
-        else
-            throw new NullQueryException
-                ("Aucun patient avec ce nom");
+        LectureBDD.assertSingle(lecture);
+        IDMalade = Integer.parseInt(lecture.get(0).get(0));
         
         // 1 Composition de la requete d'écriture
         requete = "INSERT INTO soigne (no_docteur, no_malade)" +
