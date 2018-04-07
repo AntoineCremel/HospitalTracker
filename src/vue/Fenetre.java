@@ -7,11 +7,6 @@ import javax.swing.*;
  * Contient la classe Fenetre qui sert de base à l'interface graphique.
  */
 public class Fenetre extends JFrame{
-    // Variables
-    private CardLayout c;
-    private JPanel contenu;
-    private String[] listContenu = {"login","choix","recherche","modification"};
-    
     // on crée les panneaux
     private JPanel contenant;
     private JPanel login;
@@ -24,6 +19,11 @@ public class Fenetre extends JFrame{
     private JButton modif;
     private JButton requete;
     private JButton graphe;
+    
+    //les zones de textes
+    private JTextField password;
+    private JTextField id;
+    
     
     // Constructeurs
     public Fenetre()
@@ -47,6 +47,9 @@ public class Fenetre extends JFrame{
         requete = new JButton("REQUETE");
         graphe = new JButton("GRAPHE");
     
+    //On crée les zones de texte
+        password = new JTextField("password");
+        id = new JTextField("id");
     }
     
     // Methodes
