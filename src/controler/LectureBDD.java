@@ -16,7 +16,7 @@ abstract class LectureBDD {
     page recherche du programme afin de remonter les informations à
     l'utilisateur
     */
-    public ArrayList<String[]> maladesMutuelle(Connexion connex,
+    public static ArrayList maladesMutuelle(Connexion connex,
             String mutuelle) throws SQLException
     {
         /*
@@ -34,7 +34,7 @@ abstract class LectureBDD {
         // Création d'un string de requête SQL
         String requete;
         // Création de la variable de retour
-        ArrayList<String[]> retour;
+        ArrayList retour;
         
         requete = "SELECT `malade`.`nom`, `malade`.`prenom` FROM `malade`" +
                 "WHERE (`malade`.`mutuelle` = \""+ mutuelle + "\")";
@@ -48,7 +48,7 @@ abstract class LectureBDD {
     Cette section de la classe contient des méthodes qui fonctionnent en support
     des méthodes d'écriture.
     */
-    public ArrayList<String[]> docteursByName(Connexion connex,
+    public static ArrayList docteurByName(Connexion connex,
             String nomDocteur) throws SQLException
     {
         /*
@@ -60,10 +60,32 @@ abstract class LectureBDD {
         // Création d'un string de requête SQL
         String requete;
         //Création de la variable de retour 
-        ArrayList<String[]> retour;
+        ArrayList retour;
         
         // 1 Composition de la requête
-        requete = "SELECT * FROM `docteur` WHERE `nom`=" + nomDocteur;
+        requete = "SELECT * FROM `employe` WHERE `nom`=" + nomDocteur;
+        
+        // 2 Executioon et récupération du résultat
+        retour = connex.remplirChampsRequete(requete);
+        
+        return retour;
+    }
+    public static ArrayList patientByName(Connexion connex,
+            String nomPatient) throws SQLException
+    {
+        /*
+        Fonction qui permet de récupérer une liste de patients répondant au nom
+        nomPatient. Renvoit tous les champs de chaque ligne correspondant à ce
+        nom.
+        */
+        // 0 Variables
+        // Création d'un string de requête SQL
+        String requete;
+        //Création de la variable de retour 
+        ArrayList retour;
+        
+        // 1 Composition de la requête
+        requete = "SELECT * FROM `malade` WHERE `nom`=" + nomPatient;
         
         // 2 Executioon et récupération du résultat
         retour = connex.remplirChampsRequete(requete);
