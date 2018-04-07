@@ -25,14 +25,13 @@ public class HospitalTracker implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource().equals(fen.getLog())){
+        if(ae.getSource().equals(fen.getLog())){ //Si on appuie sur login
             fen.nextContenu(1);
-            //System.out.println("coucou");
         }
-        if(ae.getSource().equals(fen.getModif())){
+        if(ae.getSource().equals(fen.getModif())){ //modifier
             fen.nextContenu(3);
         }
-        if(ae.getSource().equals(fen.getRecherche())){
+        if(ae.getSource().equals(fen.getRecherche())){//recherche
             fen.nextContenu(2);
         }
     }

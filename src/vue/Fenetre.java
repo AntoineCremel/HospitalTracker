@@ -23,6 +23,12 @@ public class Fenetre extends JFrame{
     //les zones de textes
     private JTextField password;
     private JTextField id;
+    private JTextField request;
+    private JTextField ecrire;
+    
+    //les textes
+    private JLabel demande;
+    private JLabel modifier;
     
     
     // Constructeurs
@@ -50,19 +56,33 @@ public class Fenetre extends JFrame{
     //On crée les zones de texte
         password = new JTextField("password");
         id = new JTextField("id");
+        request = new JTextField();
+        ecrire = new JTextField();
+    
+    //On crée les labels
+        demande = new JLabel("REQUETE");
+        modifier = new JLabel("MODIFIER");
     }
     
     // Methodes
     public void affiche(){
         //on remplit les panneaux
+        password.setPreferredSize(new Dimension(150, 30));
+        id.setPreferredSize(new Dimension(150, 30));
+        request.setPreferredSize(new Dimension(150, 30));
+        ecrire.setPreferredSize(new Dimension(150, 30));
+        login.add(id);
+        login.add(password);
         login.add(log);
         choix.add(modif);
         choix.add(requete);
         choix.add(graphe);
+        recherche.add(demande);
+        recherche.add(request);
+        modification.add(modifier);
+        modification.add(ecrire);
         setContentPane(login);
-        setVisible(true);
-      
-        
+        setVisible(true);  
     }
 
 
@@ -82,7 +102,17 @@ public JButton getGraphe(){
     return graphe;
 }
 
-public void nextContenu(int c){
+//Récuperer l'id entré par l'utilisateur
+public String getId(){
+    return id.getText();
+}
+
+//Récupérer le mot de passe entré par l'utilisateur
+public String getPassword(){
+    return password.getText();
+}
+
+public void nextContenu(int c){//Changer le contenu
     switch(c)
     {
         case 1:
@@ -97,7 +127,7 @@ public void nextContenu(int c){
         default:
             setContentPane(login);
     }
-    revalidate();
+    revalidate();//Changer de panel
 }
 
 }
