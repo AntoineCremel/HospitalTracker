@@ -1,0 +1,29 @@
+Question 1):SELECT `nom`,`prenom` FROM `malade` WHERE `mutuelle` LIKE 'MAAF'
+
+Question 2):SELECT `nom`,`prenom` FROM `employe` JOIN `infirmier` ON `employe`.`numero` = `infirmier`.`numero` WHERE `infirmier`.`rotation` = 'NUIT'
+
+
+Question 3):SELECT `service`.`nom`,`service`.`batiment`,`employe`.`prenom`,`employe`.`nom`,`docteur`.`specialite` FROM `service`, `docteur`,`employe` WHERE `service`.`directeur` = `docteur`.`numero`AND `service`.`directeur` =`employe`.`numero`
+
+
+Question 4):SELECT `chambre`.`no_chambre`,`chambre`.`nb_lits`,`hospitalisation`.`lit`,`service`.`nom`,`malade`.`nom`,`malade`.`prenom`,`malade`.`mutuelle` FROM `chambre`, `hospitalisation`,`service`,`malade` WHERE `malade`.`mutuelle` LIKE 'MN%'
+
+Question 5):SELECT `code_service`,  AVG(salaire) 
+FROM infirmier
+WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG' OR `code_service`LIKE 'CAR'
+GROUP BY `code_service`
+
+Question 6):SELECT `code_service`,  AVG(`nb_lits`) 
+FROM chambre
+WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG'
+GROUP BY `code_service`
+
+Question 7):
+SELECT `soigne`.`no_malade`,`malade`.`nom`,`malade`.`prenom`, COUNT(`no_malade`) FROM soigne WHERE `no_malade`=`numero` GROUP BY `no_malade` HAVING COUNT(*)=4
+
+
+Question 8):SELECT `chambre`.`surveillant`, COUNT((`chambre`.`surveillant`)/(`chambre`.`nb_lits`)) FROM `chambre` WHERE `hospitalisation`.`no_malade`=`malade`.`numero` GROUP BY `code_service` 
+
+Question 9):SELECT `employe`.`nom`,`employe`.`prenom`, COUNT(`no_malade`) FROM employe,soigne WHERE `soigne`.`no_malade`=`employe`.`numero` GROUP BY `no_malade` HAVING COUNT(*)>=1
+
+Question 10: SELECT `employe`.`nom`,`employe`.`prenom`, COUNT(`no_malade`) FROM employe,soigne WHERE `soigne`.`no_malade`=`employe`.`numero` GROUP BY `no_malade` HAVING COUNT(*)=1
