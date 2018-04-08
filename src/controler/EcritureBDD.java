@@ -72,5 +72,12 @@ abstract class EcritureBDD {
         connex.executeUpdate(requete);
         
     }
+    public static void engagerDocteur(Connexion connex, String nom,
+            String prenom, String tel, String adresse, String sepcialite)
+    {
+        /*
+        Fonction utilisée pour ajouter un docteur à la base de données.
+        */
+    }
 }
 
