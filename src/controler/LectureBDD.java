@@ -20,7 +20,8 @@ abstract class LectureBDD {
             String mutuelle) throws SQLException
     {
         /*
-        Fonction chargée de renvoyer une liste de tous les malades ayant une
+        Fonction chargée de renvoyer une liste des noms et prénoms 
+        de tous les malades ayant une
         certaine mutuelle.
         Entrées : 
             - connex, une instance de la classe connexion permettant les
@@ -40,6 +41,25 @@ abstract class LectureBDD {
                 "WHERE (`malade`.`mutuelle` = \""+ mutuelle + "\")";
                 
         retour = connex.remplirChampsRequete(requete);
+        
+        return retour;
+    }
+    public static ArrayList infirmiersNuit(Connexion connex) throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        String requete;
+        
+        // 1 Composition de la requete
+        requete = "SELECT nom, prenom FROM `employe`" +
+                "INNER JOIN `infirmier` ON infirmier.numero = employe.numero"
+                + "WHERE infirmier.rotation = \"NUIT\"";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
         return retour;
     }
