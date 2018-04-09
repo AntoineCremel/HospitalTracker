@@ -30,6 +30,12 @@ public class Fenetre extends JFrame{
     private JLabel demande;
     private JLabel modifier;
     
+    //les combos
+   private JComboBox choixRequete;
+   
+   //les Strings
+   private String[] tab_choix={"Maaf","choix2","choix3","choix4"};
+    
     
     // Constructeurs
     public Fenetre()
@@ -62,6 +68,18 @@ public class Fenetre extends JFrame{
     //On crée les labels
         demande = new JLabel("REQUETE");
         modifier = new JLabel("MODIFIER");
+        
+    //On crée les combos box
+        choixRequete = new JComboBox(tab_choix);
+    }
+    
+    public Fenetre(String nom){
+        super();
+        setTitle(nom);
+        setSize(400, 400);
+        setLocationRelativeTo(null);    
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
     }
     
     // Methodes
@@ -71,6 +89,7 @@ public class Fenetre extends JFrame{
         id.setPreferredSize(new Dimension(150, 30));
         request.setPreferredSize(new Dimension(150, 30));
         ecrire.setPreferredSize(new Dimension(150, 30));
+        choixRequete.setPreferredSize(new Dimension(150, 30));
         login.add(id);
         login.add(password);
         login.add(log);
@@ -78,7 +97,8 @@ public class Fenetre extends JFrame{
         choix.add(requete);
         choix.add(graphe);
         recherche.add(demande);
-        recherche.add(request);
+        //recherche.add(request);
+        recherche.add(choixRequete);
         modification.add(modifier);
         modification.add(ecrire);
         setContentPane(login);
@@ -102,6 +122,10 @@ public JButton getGraphe(){
     return graphe;
 }
 
+public JComboBox getChoixRequete(){
+    return choixRequete;
+}
+
 //Récuperer l'id entré par l'utilisateur
 public String getId(){
     return id.getText();
@@ -111,6 +135,11 @@ public String getId(){
 public String getPassword(){
     return password.getText();
 }
+
+public int getSelectedIndex(){
+    return choixRequete.getSelectedIndex();
+}
+
 
 public void nextContenu(int c){//Changer le contenu
     switch(c)

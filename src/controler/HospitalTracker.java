@@ -16,7 +16,7 @@ import modele.Connexion;
  * @author Antoine
  */
 public class HospitalTracker implements ActionListener{
-    private Fenetre fen = new Fenetre();
+    private Fenetre fen,fen2;
     private Connexion connex;
     
     public HospitalTracker(Fenetre fen){
@@ -24,6 +24,7 @@ public class HospitalTracker implements ActionListener{
         this.fen.getLog().addActionListener(this);
         this.fen.getModif().addActionListener(this);
         this.fen.getRecherche().addActionListener(this);
+        this.fen.getChoixRequete().addActionListener(this);
     }
     
     @Override
@@ -52,6 +53,26 @@ public class HospitalTracker implements ActionListener{
         }
         if(ae.getSource().equals(fen.getRecherche())){//recherche
             fen.nextContenu(2);
+        }
+        if(ae.getSource().equals(fen.getChoixRequete())){
+            int index = fen.getSelectedIndex();
+            String nom;
+            switch(index){
+                case 0:
+                    nom = "MAAF";
+                    break;
+                case 1:
+                    nom = "";
+                    break;
+                case 2:
+                    nom = "";
+                    break;
+                default:
+                    nom= "HospitalTracker";
+                    break;    
+            }
+            fen2= new Fenetre(nom);
+            
         }
     }
     
