@@ -8,8 +8,12 @@ package controler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vue.Fenetre;
 import modele.Connexion;
+import vue.Tableau;
 
 /**
  *
@@ -18,6 +22,7 @@ import modele.Connexion;
 public class HospitalTracker implements ActionListener{
     private Fenetre fen,fen2;
     private Connexion connex;
+    private ArrayList<String> test;
     
     public HospitalTracker(Fenetre fen){
         this.fen = fen;
@@ -59,7 +64,15 @@ public class HospitalTracker implements ActionListener{
             String nom;
             switch(index){
                 case 0:
+            {
+                try {
                     nom = "MAAF";
+                    test = LectureBDD.maladesMutuelle(connex,nom);
+                    Tableau b = new Tableau(test,nom);
+                } catch (SQLException ex) {
+                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
                     break;
                 case 1:
                     nom = "";
@@ -71,7 +84,7 @@ public class HospitalTracker implements ActionListener{
                     nom= "HospitalTracker";
                     break;    
             }
-            fen2= new Fenetre(nom);
+            //fen2= new Fenetre(nom);
             
         }
     }
@@ -84,7 +97,6 @@ public class HospitalTracker implements ActionListener{
         Fenetre fen = new Fenetre();
         HospitalTracker a = new HospitalTracker(fen);
         fen.affiche();
-        
     }
     
     // Methodes 

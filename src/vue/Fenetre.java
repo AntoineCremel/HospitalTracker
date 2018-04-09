@@ -2,7 +2,9 @@ package vue;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
+
 /**
  * Contient la classe Fenetre qui sert de base à l'interface graphique.
  */
@@ -31,11 +33,16 @@ public class Fenetre extends JFrame{
     private JLabel modifier;
     
     //les combos
-   private JComboBox choixRequete;
+    private JComboBox choixRequete;
    
-   //les Strings
-   private String[] tab_choix={"Maaf","choix2","choix3","choix4"};
-    
+    //les Strings
+    private String[] tab_choix={"Maaf","choix2","choix3","choix4"};
+   
+    //Les JTable
+    private JTable tableau;
+    //Les tableaux
+    private Object[] donnees;
+    private String[] entete;
     
     // Constructeurs
     public Fenetre()
@@ -71,15 +78,9 @@ public class Fenetre extends JFrame{
         
     //On crée les combos box
         choixRequete = new JComboBox(tab_choix);
-    }
     
-    public Fenetre(String nom){
-        super();
-        setTitle(nom);
-        setSize(400, 400);
-        setLocationRelativeTo(null);    
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+    //On crée les tables
+        
     }
     
     // Methodes
