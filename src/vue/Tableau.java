@@ -39,5 +39,6 @@ public class Tableau extends JFrame{
     JTable tableau = new JTable(test2, title);
     //On ajoute le panneau avec un scroll
     this.getContentPane().add(new JScrollPane(tableau));
+    this.setVisible(true);
   }   
 }
