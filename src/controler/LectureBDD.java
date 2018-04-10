@@ -74,6 +74,59 @@ abstract class LectureBDD {
         
         return tab;
     }
+    public static Tableau presentationServices(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant le nom, bâtiment, prenom, nom et spécialité du
+        directeur de chaque service.
+        */
+        // 0 Variables
+        Tableau tab;
+        String requete;
+        String[] entete = {"Service", "Batiment", "Prenom du directeur",
+            "Nom du directeur", "Specialite du directeur"};
+        
+        //1 Composition de la requête
+        requete = "SELECT `service`.`nom`,`service`.`batiment`,`employe`"
+                + ".`prenom`,`employe`.`nom`,`docteur`.`specialite` FROM "
+                + "`service`, `docteur`,`employe` WHERE `service`.`directeur` "
+                + "= `docteur`.`numero`AND `service`.`directeur` =`employe`"
+                + ".`numero`";
+        
+        tab = new Tableau(connex.remplirChampsRequete(requete), entete,
+                "Services");
+        
+        return tab;
+    }
+    public static Tableau litsOcupeBatiment(Connexion connex, String batiment,
+            String debutMutuelle)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des lits occupés dans le batiment par des
+        malades dont la mutuelle commence par debutMutuelle
+        */
+        // 0 Variables
+        Tableau tab;
+        String requete;
+        String[] entete = {"Chambre", "nombre de lits", "lit",
+            "Nom du service", "nom malade", "prenom malade", "Mutuelle malade"};
+        
+        //1 Composition de la requête
+        requete = "SELECT `chambre`.`no_chambre`,`chambre`.`nb_lits`,"
+                + "`hospitalisation`.`lit`,`service`.`nom`,`malade`.`nom`,"
+                + "`malade`.`prenom`,`malade`.`mutuelle` FROM `chambre`, "
+                + "`hospitalisation`,`service`,`malade` WHERE `malade`."
+                + "`mutuelle` LIKE '"+ debutMutuelle +"%'";
+                //AND "
+                //+ "`service`.`batiment` = " + batiment;
+        
+        tab = new Tableau(connex.remplirChampsRequete(requete), entete,
+                "Services");
+        
+        return tab;
+    }
     /// Support de l'écriture
     /*
     Cette section de la classe contient des méthodes qui fonctionnent en support

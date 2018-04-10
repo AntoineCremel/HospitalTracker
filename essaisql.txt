@@ -6,7 +6,7 @@ Question 2):SELECT `nom`,`prenom` FROM `employe` JOIN `infirmier` ON `employe`.`
 Question 3):SELECT `service`.`nom`,`service`.`batiment`,`employe`.`prenom`,`employe`.`nom`,`docteur`.`specialite` FROM `service`, `docteur`,`employe` WHERE `service`.`directeur` = `docteur`.`numero`AND `service`.`directeur` =`employe`.`numero`
 
 
-Question 4):SELECT `chambre`.`no_chambre`,`chambre`.`nb_lits`,`hospitalisation`.`lit`,`service`.`nom`,`malade`.`nom`,`malade`.`prenom`,`malade`.`mutuelle` FROM `chambre`, `hospitalisation`,`service`,`malade` WHERE `malade`.`mutuelle` LIKE 'MN%'
+Question 4):SELECT `chambre`.`no_chambre`,`chambre`.`nb_lits`,`hospitalisation`.`lit`,`service`.`nom`,`malade`.`nom`,`malade`.`prenom`,`malade`.`mutuelle` FROM `chambre`, `hospitalisation`,`service`,`malade` WHERE `malade`.`mutuelle` LIKE 'MN%' AND `service`.`batiment`=
 
 Question 5):SELECT `code_service`,  AVG(salaire) 
 FROM infirmier

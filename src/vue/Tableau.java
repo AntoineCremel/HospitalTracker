@@ -17,6 +17,7 @@ import javax.swing.JTable;
  */
 public class Tableau extends JFrame{
     
+    
     public Tableau(ArrayList<ArrayList<String>> test, String[] entete, String nom){
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,18 +28,19 @@ public class Tableau extends JFrame{
     int tailleI = test.size();
     int tailleJ = test.get(0).size();
     //Object
-    Object[][] test2 = new Object[tailleI][tailleJ];
+    Object[][] liste = new Object[tailleI][tailleJ];
     for(int i=0; i< tailleI; i++) {
         for(int j=0; j<tailleJ; j++) {
-                test2[i][j] = test.get(i).get(j);
+                liste[i][j] = test.get(i).get(j);
         }
     }
 
     //Les titres des colonnes
     String  title[] = entete;
-    JTable tableau = new JTable(test2, title);
+    JTable tableau = new JTable(liste, title);
     //On ajoute le panneau avec un scroll
     this.getContentPane().add(new JScrollPane(tableau));
     this.setVisible(true);
-  }   
+  }
+    
 }
