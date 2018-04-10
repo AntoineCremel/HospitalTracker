@@ -16,21 +16,23 @@ import javax.swing.JTable;
  * @author Jean
  */
 public class Tableau extends JFrame{
-    public Tableau(ArrayList test,String nom){
+    
+    public Tableau(ArrayList<ArrayList<String>> test,String nom){
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.setTitle("JTable");
     this.setSize(300, 120);
 
     //Les données du tableau
-    int tailleTab = test.size();
+    int tailleI = test.size();
+    int tailleJ = test.get(0).size();
     //Object
-    Object[][] test2 = null;
-    for(int i=0; i< tailleTab; i++) {
-    for(int j=0; j<tailleTab; j++) {
-            test2[j][i] = test.get(j);
+    Object[][] test2 = new Object[tailleI][tailleJ];
+    for(int i=0; i< tailleI; i++) {
+        for(int j=0; j<tailleJ; j++) {
+                test2[i][j] = test.get(i).get(j);
+        }
     }
-}
 
     //Les titres des colonnes
     String  title[] = {"Prénom","Nom"};

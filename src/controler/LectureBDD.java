@@ -16,7 +16,7 @@ abstract class LectureBDD {
     page recherche du programme afin de remonter les informations à
     l'utilisateur
     */
-    public static ArrayList maladesMutuelle(Connexion connex,
+    public static ArrayList<ArrayList<String>> maladesMutuelle(Connexion connex,
             String mutuelle) throws SQLException
     {
         /*

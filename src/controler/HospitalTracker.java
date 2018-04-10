@@ -22,10 +22,11 @@ import vue.Tableau;
 public class HospitalTracker implements ActionListener{
     private Fenetre fen,fen2;
     private Connexion connex;
-    private ArrayList<String> test;
+    private ArrayList<ArrayList<String>> test;
     
     public HospitalTracker(Fenetre fen){
         this.fen = fen;
+        this.connex = null;
         this.fen.getLog().addActionListener(this);
         this.fen.getModif().addActionListener(this);
         this.fen.getRecherche().addActionListener(this);

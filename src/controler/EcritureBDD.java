@@ -77,6 +77,7 @@ abstract class EcritureBDD {
     {
         /*
         Fonction utilisée pour ajouter un docteur à la base de données.
+        Reçoit en paramètre toutes les 
         */
     }
 }
