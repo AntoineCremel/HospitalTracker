@@ -17,12 +17,14 @@ import javax.swing.JTable;
  */
 public class Tableau extends JFrame{
     
+    public Tableau(){
+        
+    }
     
     public Tableau(ArrayList<ArrayList<String>> test, String[] entete, String nom){
     this.setLocationRelativeTo(null);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setTitle("JTable");
-    this.setSize(300, 120);
+    this.setTitle(nom);
+    this.setSize(400, 200);
 
     //Les données du tableau
     int tailleI = test.size();

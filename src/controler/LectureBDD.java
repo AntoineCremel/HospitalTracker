@@ -132,7 +132,7 @@ abstract class LectureBDD {
     Cette section de la classe contient des méthodes qui fonctionnent en support
     des méthodes d'écriture.
     */
-    public static ArrayList<ArrayList<String>> docteurByName(Connexion connex,
+    public static Tableau docteurByName(Connexion connex,
             String nomDocteur) throws SQLException
     {
         /*
@@ -142,9 +142,11 @@ abstract class LectureBDD {
         */
         // 0 Variables
         // Création d'un string de requête SQL
+        Tableau tab;
         String requete;
         //Création de la variable de retour 
         ArrayList retour;
+        String[] entete = {"numero","Nom","Prenom","adresse","telephone"};
         
         // 1 Composition de la requête
         requete = "SELECT * FROM `employe` WHERE `nom`=" + nomDocteur +
@@ -152,9 +154,9 @@ abstract class LectureBDD {
                 ".`numero`";
         
         // 2 Executioon et récupération du résultat
-        retour = connex.remplirChampsRequete(requete);
+        tab= new Tableau(connex.remplirChampsRequete(requete),entete,"docteur");
         
-        return retour;
+        return tab;
     }
     public static ArrayList<ArrayList<String>> patientByName(Connexion connex,
             String nomPatient) throws SQLException

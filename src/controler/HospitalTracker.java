@@ -35,6 +35,7 @@ public class HospitalTracker implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent ae) {
+        String nom;
         if(ae.getSource().equals(fen.getLog())){ //Si on appuie sur login
             // On récupère l'id et le password donnés par l'utilisateur et on
             // ouvre une connexion à la base de donnée
@@ -62,10 +63,8 @@ public class HospitalTracker implements ActionListener{
         }
         if(ae.getSource().equals(fen.getChoixRequete())){
             int index = fen.getSelectedIndex();
-            String nom;
             switch(index){
                 case 0:
-            {
                 try {
                     nom = "MAAF";
                     Tableau b = LectureBDD.maladesMutuelle(connex,nom);
@@ -73,21 +72,37 @@ public class HospitalTracker implements ActionListener{
                 } catch (SQLException ex) {
                     Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
                     break;
                 case 1:
-                    nom = "";
-                    break;
+                try {
+                    Tableau c = LectureBDD.infirmiersNuit(connex);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 case 2:
-                    nom = "";
-                    break;
+                     try {
+                    Tableau d = LectureBDD.presentationServices(connex);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 default:
-                    nom= "HospitalTracker";
+                    System.out.println("erreur");
                     break;    
-            }
-            //fen2= new Fenetre(nom);
-            
+            }  
         }
+        if(ae.getSource().equals(fen.getOk())){
+           try {
+                    nom = fen.getDocteur();
+                    Tableau e = LectureBDD.docteurByName(connex,nom);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        
+        
     }
     
     /**
