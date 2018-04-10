@@ -68,8 +68,8 @@ public class HospitalTracker implements ActionListener{
             {
                 try {
                     nom = "MAAF";
-                    test = LectureBDD.maladesMutuelle(connex,nom);
-                    Tableau b = new Tableau(test,nom);
+                    Tableau b = LectureBDD.maladesMutuelle(connex,nom);
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
                 }

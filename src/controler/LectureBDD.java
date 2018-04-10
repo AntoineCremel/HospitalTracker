@@ -3,6 +3,7 @@ package controler;
 import java.sql.SQLException;
 import modele.Connexion;
 import java.util.ArrayList;
+import vue.Tableau;
 /**
  *  Classe regroupant toutes les fonctions de lecture de la Base De Données
  * 
@@ -16,7 +17,7 @@ abstract class LectureBDD {
     page recherche du programme afin de remonter les informations à
     l'utilisateur
     */
-    public static ArrayList<ArrayList<String>> maladesMutuelle(Connexion connex,
+    public static Tableau maladesMutuelle(Connexion connex,
             String mutuelle) throws SQLException
     {
         /*
@@ -35,16 +36,21 @@ abstract class LectureBDD {
         // Création d'un string de requête SQL
         String requete;
         // Création de la variable de retour
-        ArrayList retour;
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String[] entete = {"Nom", "Prénom"};
         
         requete = "SELECT `malade`.`nom`, `malade`.`prenom` FROM `malade`" +
                 "WHERE (`malade`.`mutuelle` = \""+ mutuelle + "\")";
                 
         retour = connex.remplirChampsRequete(requete);
         
-        return retour;
+        tab = new Tableau(retour, entete, "Malades ayant la "
+        + mutuelle);
+        
+        return tab;
     }
-    public static ArrayList<ArrayList<String>> infirmiersNuit(Connexion connex)
+    public static Tableau infirmiersNuit(Connexion connex)
             throws SQLException
     {
         /*
@@ -53,7 +59,9 @@ abstract class LectureBDD {
         */
         // 0 Variables
         ArrayList<ArrayList<String>> retour;
+        Tableau tab;
         String requete;
+        String[] entete = {"Nom", "Prenom"};
         
         // 1 Composition de la requete
         requete = "SELECT nom, prenom FROM `employe`" +
@@ -62,7 +70,9 @@ abstract class LectureBDD {
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        return retour;
+        tab = new Tableau(retour, entete, "Infirmiers travaillant de nuit");
+        
+        return tab;
     }
     /// Support de l'écriture
     /*
