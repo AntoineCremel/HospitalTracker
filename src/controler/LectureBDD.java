@@ -44,7 +44,8 @@ abstract class LectureBDD {
         
         return retour;
     }
-    public static ArrayList infirmiersNuit(Connexion connex) throws SQLException
+    public static ArrayList<ArrayList<String>> infirmiersNuit(Connexion connex)
+            throws SQLException
     {
         /*
         Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
@@ -68,7 +69,7 @@ abstract class LectureBDD {
     Cette section de la classe contient des méthodes qui fonctionnent en support
     des méthodes d'écriture.
     */
-    public static ArrayList docteurByName(Connexion connex,
+    public static ArrayList<ArrayList<String>> docteurByName(Connexion connex,
             String nomDocteur) throws SQLException
     {
         /*
@@ -92,7 +93,7 @@ abstract class LectureBDD {
         
         return retour;
     }
-    public static ArrayList patientByName(Connexion connex,
+    public static ArrayList<ArrayList<String>> patientByName(Connexion connex,
             String nomPatient) throws SQLException
     {
         /*
