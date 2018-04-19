@@ -64,11 +64,11 @@ public class LectureBDD {
         String[] entete = {"Nom", "Prenom"};
         
         // 1 Composition de la requete
-        requete = "SELECT nom, prenom FROM `employe`" +
-                "INNER JOIN `infirmier` ON infirmier.numero = employe.numero"
-                + "WHERE infirmier.rotation = \"NUIT\"";
+        requete = "SELECT `nom`,`prenom` FROM `employe` "
+                + "JOIN `infirmier` ON `employe`.`numero` = `infirmier`.`numero` "
+                + "WHERE `infirmier`.`rotation` = 'NUIT'";
         
-        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        retour = connex.remplirChampsRequete(requete);
         
         tab = new Tableau(retour, entete, "Infirmiers travaillant de nuit");
         
