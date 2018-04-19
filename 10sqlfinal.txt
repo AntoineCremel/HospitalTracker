@@ -1,0 +1,30 @@
+Question 1):SELECT `nom`,`prenom` FROM `malade` WHERE `mutuelle` LIKE 'MAAF'
+
+Question 2):SELECT `nom`,`prenom` FROM `employe` JOIN `infirmier` ON `employe`.`numero` = `infirmier`.`numero` WHERE `infirmier`.`rotation` = 'NUIT'
+
+
+Question 3):SELECT `service`.`nom`,`service`.`batiment`,`employe`.`prenom`,`employe`.`nom`,`docteur`.`specialite` FROM `service`, `docteur`,`employe` WHERE `service`.`directeur` = `docteur`.`numero`AND `service`.`directeur` =`employe`.`numero`
+
+
+Question 4):
+
+select h.no_chambre, h.lit, s.nom, m.prenom, m.nom, m.mutuelle from service s, hospitalisation h, malade m where s.batiment = 'B'and s.code = h.code_service and h.no_malade = m.numero and m.mutuelle like 'MN%'
+Question 5):SELECT `code_service`,  AVG(salaire) 
+FROM infirmier
+WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG' OR `code_service`LIKE 'CAR'
+GROUP BY `code_service`
+
+Question 6):SELECT `code_service`,  AVG(`nb_lits`) 
+FROM chambre
+WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG'
+GROUP BY `code_service`
+
+Question 7):
+select a.nom, a.prenom, count(*) as nb_soignants, count(distinct s.specialite) as nb_specialites from docteur s, soigne so, malade a where s.numero = so.no_docteur and so.no_malade = a.numero group by a.nom, a.prenom having count(*) > 3
+
+
+Question 8):select nom, ( select count(*) from infirmier i where i.code_service = s.code ) / ( select count(*) from hospitalisation h where h.code_service = s.code ) as rapport_i_sur_m from service s
+
+Question 9):select prenom, nom from employe where numero in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )
+
+Question 10: select prenom, nom from employe where numero in ( select numero from docteur ) and numero not in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )
