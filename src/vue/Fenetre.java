@@ -1,180 +1,167 @@
 package vue;
 
+import controler.LectureBDD;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import modele.Connexion;
 
 /**
  * Contient la classe Fenetre qui sert de base à l'interface graphique.
  */
-public class Fenetre extends JFrame{
+public class Fenetre extends JFrame implements ActionListener{
     // on crée les panneaux
-    private JPanel contenant;
-    private JPanel login;
+    private Connexion connex;
+    
+    private LectureBDD a;
+    
+    private JPanel bienvenue;
+    private JPanel supprimer;
     private JPanel choix;
-    private JPanel recherche;
+    private JPanel ajout;
     private JPanel modification;
+    private JPanel graphe;
+    private JPanel choixGraphe;
         
     //On crée les boutons
-    private JButton log;
-    private JButton modif;
-    private JButton requete;
-    private JButton graphe;
+    
+    private JButton graphe1;
+    private JButton graphe2;
+    private JButton graphe3;
     private JButton ok;
     
     //les zones de textes
-    private JTextField password;
-    private JTextField id;
     private JTextField request;
-    private JTextField ecrire;
-    private JTextField docteur;
     
     //les textes
-    private JLabel demande;
-    private JLabel modifier;
-    private JLabel doc;
+    private JLabel bienvenue1;
+    private JLabel choixRequest;
+    private JLabel texteRequete;
     
     //les combos
     private JComboBox choixRequete;
+    
+    private JTabbedPane onglet;
    
     //les Strings
     private String[] tab_choix={"Maaf","infirmiers nuit","presentation services"};
-   
-    //Les JTable
-    private JTable tableau;
-    //Les tableaux
-    private Object[] donnees;
-    private String[] entete;
     
     // Constructeurs
-    public Fenetre()
+    public Fenetre(Connexion connex)
     {
         super();
         setTitle("HospitalTracker");
-        setSize(800, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-    
-    // on crée les panneaux
-        login = new JPanel();
-        choix = new JPanel();
-        recherche = new JPanel();
-        modification = new JPanel();
+        
+        LectureBDD a = new LectureBDD();
+        this.connex = connex;
         
     //On crée les boutons
-        log = new JButton("LOGIN");
-        modif = new JButton("MODIFIER");
-        requete = new JButton("REQUETE");
-        graphe = new JButton("GRAPHE");
+        graphe1 = new JButton("GRAPHE1");
+        graphe2 = new JButton("GRAPHE2");
+        graphe3 = new JButton("GRAPHE3");
         ok = new JButton("ok");
     
     //On crée les zones de texte
-        password = new JTextField("password");
-        id = new JTextField("id");
-        request = new JTextField();
-        ecrire = new JTextField();
-        docteur = new JTextField();
+        request = new JTextField(15);
     
     //On crée les labels
-        demande = new JLabel("REQUETE");
-        modifier = new JLabel("MODIFIER");
-        doc = new JLabel("liste de docteurs répondant au nom");
+        bienvenue1 = new JLabel("Bienvenue que souhaitez-vous faire");
+        choixRequest = new JLabel("Choisissez votre requête");
+        texteRequete = new JLabel("Entrez le texte de votre requête");
         
     //On crée les combos box
         choixRequete = new JComboBox(tab_choix);
-    
-    //On crée les tables
+        choixRequete.addActionListener(this);
+
+        // on crée les panneaux
+        choix = new JPanel(new GridLayout(15,2,15,15));
+        ajout = new JPanel();
+        modification = new JPanel();
+        supprimer = new JPanel();
+        graphe = new JPanel();
+        bienvenue = new JPanel();
         
-    }
-    
-    // Methodes
-    public void affiche(){
-        //on remplit les panneaux
-        password.setPreferredSize(new Dimension(150, 30));
-        id.setPreferredSize(new Dimension(150, 30));
-        request.setPreferredSize(new Dimension(150, 30));
-        ecrire.setPreferredSize(new Dimension(150, 30));
-        choixRequete.setPreferredSize(new Dimension(150, 30));
-        docteur.setPreferredSize(new Dimension(150, 30));
-        login.add(id);
-        login.add(password);
-        login.add(log);
-        choix.add(modif);
-        choix.add(requete);
-        choix.add(graphe);
-        recherche.add(demande);
-        //recherche.add(request);
-        recherche.add(choixRequete);
-        recherche.add(doc);
-        recherche.add(docteur);
-        recherche.add(ok);
-        modification.add(modifier);
-        modification.add(ecrire);
-        setContentPane(login);
-        setVisible(true);  
+        bienvenue.add(bienvenue1);
+        choix.add(choixRequest);
+        choix.add(choixRequete);
+        choix.add(texteRequete);
+        choix.add(request);
+        graphe.add(graphe1);
+        graphe.add(graphe2);
+        graphe.add(graphe3);
+        
+        onglet = new JTabbedPane();
+        
+        onglet.add("modification",modification);
+        onglet.add("Ajout",ajout);
+        onglet.add("Supprimer",supprimer);
+        onglet.add("Graphe",graphe);
+        
+        setLayout(new BorderLayout());
+        getContentPane().add(bienvenue,BorderLayout.NORTH);
+        getContentPane().add(choix,BorderLayout.WEST);
+        getContentPane().add(onglet,BorderLayout.CENTER);
+        pack();
+        setVisible(true);
     }
 
-
-public JButton getLog(){
-    return log;
-}
-
-public JButton getModif(){
-    return modif;
-}
-
-public JButton getRecherche(){
-    return requete;
-}
-
-public JButton getGraphe(){
-    return graphe;
-}
-
-public JButton getOk(){
-    return ok;
-}
-public JComboBox getChoixRequete(){
-    return choixRequete;
-}
-
-//Récuperer l'id entré par l'utilisateur
-public String getId(){
-    return id.getText();
-}
-
-//Récupérer le mot de passe entré par l'utilisateur
-public String getPassword(){
-    return password.getText();
-}
-
-public String getDocteur(){
-    return docteur.getText();
-}
-
-public int getSelectedIndex(){
-    return choixRequete.getSelectedIndex();
-}
-
-
-public void nextContenu(int c){//Changer le contenu
-    switch(c)
-    {
-        case 1:
-            setContentPane(choix);
-            break;
-        case 2:
-            setContentPane(recherche);
-            break;
-        case 3:
-            setContentPane(modification);
-            break;
-        default:
-            setContentPane(login);
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        Object source = ae.getSource();
+        String nom;
+        if(source == choixRequete){
+            int index = choixRequete.getSelectedIndex();
+            switch(index){
+                case 0:
+                    nom = "MAAF";
+            {
+                try {
+                    Tableau b = a.maladesMutuelle(connex,nom);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+               
+                case 1:
+            {
+                try {
+                    Tableau c = a.infirmiersNuit(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                 
+                case 2:
+            {
+                try {
+                    Tableau d = a.presentationServices(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                default:
+                    System.out.println("erreur");
+                    break;    
+            }  
+        }
+        /*if(ae.getSource().equals(fen.getOk())){
+           try {
+                    nom = fen.getDocteur();
+                    Tableau e = LectureBDD.docteurByName(connex,nom);
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }*/
     }
-    revalidate();//Changer de panel
-}
 
 }

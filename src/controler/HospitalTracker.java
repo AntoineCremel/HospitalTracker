@@ -13,106 +13,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import vue.Fenetre;
 import modele.Connexion;
+import vue.Login;
 import vue.Tableau;
 
 /**
  *
  * @author Antoine
  */
-public class HospitalTracker implements ActionListener{
-    private Fenetre fen,fen2;
-    private Connexion connex;
-    private ArrayList<ArrayList<String>> test;
+public class HospitalTracker{
     
     public HospitalTracker(Fenetre fen){
-        this.fen = fen;
-        this.connex = null;
-        this.fen.getLog().addActionListener(this);
-        this.fen.getModif().addActionListener(this);
-        this.fen.getRecherche().addActionListener(this);
-        this.fen.getChoixRequete().addActionListener(this);
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        String nom;
-        if(ae.getSource().equals(fen.getLog())){ //Si on appuie sur login
-            // On récupère l'id et le password donnés par l'utilisateur et on
-            // ouvre une connexion à la base de donnée
-            try{
-                // On ouvre la connexion à la base de donnée
-                connex = new Connexion("hopital", fen.getId(),
-                        fen.getPassword());
-                // On passe à la fenêtre suivante
-                fen.nextContenu(1);
-            }
-            catch(SQLException e){
-                System.out.println("Exception SQL");
-                // Afficher un message d'erreur en graphique
-            }
-            catch(ClassNotFoundException e){
-                System.out.println("Exception class not found");
-                // Afficher un message d'erreur en graphique
-            }
-        }
-        if(ae.getSource().equals(fen.getModif())){ //modifier
-            fen.nextContenu(3);
-        }
-        if(ae.getSource().equals(fen.getRecherche())){//recherche
-            fen.nextContenu(2);
-        }
-        if(ae.getSource().equals(fen.getChoixRequete())){
-            int index = fen.getSelectedIndex();
-            switch(index){
-                case 0:
-                try {
-                    nom = "MAAF";
-                    Tableau b = LectureBDD.maladesMutuelle(connex,nom);
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    break;
-                case 1:
-                try {
-                    Tableau c = LectureBDD.infirmiersNuit(connex);
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                case 2:
-                     try {
-                    Tableau d = LectureBDD.presentationServices(connex);
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                default:
-                    System.out.println("erreur");
-                    break;    
-            }  
-        }
-        if(ae.getSource().equals(fen.getOk())){
-           try {
-                    nom = fen.getDocteur();
-                    Tableau e = LectureBDD.docteurByName(connex,nom);
-                    
-                } catch (SQLException ex) {
-                    Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        }
-        
-        
+   
     }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Fenetre fen = new Fenetre();
-        HospitalTracker a = new HospitalTracker(fen);
-        fen.affiche();
+
+        Login log = new Login();
     }
     
     // Methodes 
