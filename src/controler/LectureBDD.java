@@ -99,6 +99,159 @@ public class LectureBDD {
         
         return tab;
     }
+    
+    
+    /// Support de l'écriture
+    /*
+    Cette section de la classe contient des méthodes qui fonctionnent en support
+    des méthodes d'écriture.
+    */
+    
+    public static Tableau NombreLitMoyen(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "SELECT `code_service`,  AVG(`nb_lits`) \n" +
+"FROM chambre\n" +
+"WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG'\n" +
+"GROUP BY `code_service`";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Le nombre moyen de lits");
+        
+        return tab;
+    }
+    
+     public static Tableau Rapport(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "select nom, ( select count(*) from infirmier i where i.code_service = s.code ) / ( select count(*) from hospitalisation h where h.code_service = s.code ) as rapport_i_sur_m from service s";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "rapport entre le nombre d’infirmier(ères) affecté(es) au service et le nombre de\n" +
+"malades hospitalisés dans le service ");
+        
+        return tab;
+    }
+     
+      public static Tableau SalaireMoyen(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "SELECT `code_service`,  AVG(salaire) \n" +
+"FROM infirmier\n" +
+"WHERE `code_service`LIKE 'REA' OR `code_service`LIKE 'CHG' OR `code_service`LIKE 'CAR'\n" +
+"GROUP BY `code_service`";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Salaire moyen des infirmières ");
+        
+        return tab;
+    }
+    
+       public static Tableau NombreTotalMedecins(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "select a.nom, a.prenom, count(*) as nb_soignants, count(distinct s.specialite) as nb_specialites from docteur s, soigne so, malade a where s.numero = so.no_docteur and so.no_malade = a.numero group by a.nom, a.prenom having count(*) > 3";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Le nombre moyen de lits");
+        
+        return tab;
+    }
+       public static Tableau MedecinsAvecMalade(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "select prenom, nom from employe where numero in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Prénom et nom des docteurs ayant au moins un malade hospitalisé.");
+        
+        return tab;
+    }
+    
+          public static Tableau MedecinsSansMalade(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"Nom", "Prenom"};
+        
+        // 1 Composition de la requete
+        requete = "select prenom, nom from employe where numero in ( select numero from docteur ) and numero not in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Prénom et nom des docteurs n’ayant aucun malade hospitalisé. ");
+        
+        return tab;
+    }
+    
+    
     public static Tableau litsOcupeBatiment(Connexion connex, String batiment,
             String debutMutuelle)
             throws SQLException
