@@ -24,7 +24,6 @@ public class Tableau extends JFrame{
     public Tableau(ArrayList<ArrayList<String>> test, String[] entete, String nom){
     this.setLocationRelativeTo(null);
     this.setTitle(nom);
-    this.setSize(400, 200);
 
     //Les données du tableau
     int tailleI = test.size();
@@ -42,6 +41,7 @@ public class Tableau extends JFrame{
     JTable tableau = new JTable(liste, title);
     //On ajoute le panneau avec un scroll
     this.getContentPane().add(new JScrollPane(tableau));
+    this.pack();
     this.setVisible(true);
   }
     

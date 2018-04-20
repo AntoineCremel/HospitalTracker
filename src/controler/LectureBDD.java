@@ -201,7 +201,7 @@ public class LectureBDD {
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "Le nombre moyen de lits");
+        tab = new Tableau(retour, entete, "Infirmiers travaillant de nuit");
         
         return tab;
     }

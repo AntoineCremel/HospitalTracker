@@ -48,7 +48,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private JTabbedPane onglet;
    
     //les Strings
-    private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","nombre total des médecins soignant au moins 3 malades ","rapport","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
+    private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","rapport entre le nombre d'infirmières et le nombre de malades","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
     
     // Constructeurs
     public Fenetre(Connexion connex)
@@ -71,13 +71,16 @@ public class Fenetre extends JFrame implements ActionListener{
         request = new JTextField(15);
     
     //On crée les labels
-        bienvenue1 = new JLabel("Bienvenue que souhaitez-vous faire");
+        bienvenue1 = new JLabel("Bienvenue que souhaitez-vous faire ?");
         choixRequest = new JLabel("Choisissez votre requête");
         texteRequete = new JLabel("Entrez le texte de votre requête");
         
     //On crée les combos box
         choixRequete = new JComboBox(tab_choix);
+        
         choixRequete.addActionListener(this);
+        graphe1.addActionListener(this);
+        graphe2.addActionListener(this);
 
         // on crée les panneaux
         choix = new JPanel(new GridLayout(15,2,15,15));
@@ -92,11 +95,14 @@ public class Fenetre extends JFrame implements ActionListener{
         choix.add(choixRequete);
         choix.add(texteRequete);
         choix.add(request);
-        graphe.add(graphe1);
-        graphe.add(graphe2);
-        graphe.add(graphe3);
-        
+        choix.add(graphe1);
+        choix.add(graphe2);
+        choix.add(graphe3);
         onglet = new JTabbedPane();
+        Camembert ab = new Camembert("test");
+        JPanel test = new JPanel();
+        test = ab.createDemoPanel();
+        graphe.add(test);
         
         onglet.add("modification",modification);
         onglet.add("Ajout",ajout);
@@ -109,6 +115,7 @@ public class Fenetre extends JFrame implements ActionListener{
         getContentPane().add(onglet,BorderLayout.CENTER);
         pack();
         setVisible(true);
+       
     }
 
     @Override
@@ -162,7 +169,7 @@ public class Fenetre extends JFrame implements ActionListener{
                      case 4:
             {
                 try {
-                    Tableau e = a.SalaireMoyen(connex);
+                    Tableau f = a.SalaireMoyen(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -172,7 +179,7 @@ public class Fenetre extends JFrame implements ActionListener{
                        case 5:
             {
                 try {
-                    Tableau e = a.NombreTotalMedecins(connex);
+                    Tableau g = a.NombreTotalMedecins(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -182,7 +189,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     case 6:
             {
                 try {
-                    Tableau e = a.Rapport(connex);
+                    Tableau h = a.Rapport(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -192,7 +199,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     case 7:
             {
                 try {
-                    Tableau e = a.MedecinsAvecMalade(connex);
+                    Tableau i = a.MedecinsAvecMalade(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -201,7 +208,7 @@ public class Fenetre extends JFrame implements ActionListener{
                      case 8:
             {
                 try {
-                    Tableau e = a.MedecinsSansMalade(connex);
+                    Tableau j = a.MedecinsSansMalade(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -210,7 +217,18 @@ public class Fenetre extends JFrame implements ActionListener{
                 default:
                     System.out.println("erreur");
                     break;    
-            }  
+            }
+        }
+            if(source == graphe1){
+                Camembert ab = new Camembert("test");
+                JPanel test = new JPanel();
+                test = ab.createDemoPanel();
+                graphe.add(test);
+            }
+            if(source == graphe2){
+                graphe.removeAll();
+                graphe.repaint();
+            }
         }
         /*if(ae.getSource().equals(fen.getOk())){
            try {
@@ -222,5 +240,3 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
         }*/
     }
-
-}
