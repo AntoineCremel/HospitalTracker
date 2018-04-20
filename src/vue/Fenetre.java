@@ -48,7 +48,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private JTabbedPane onglet;
    
     //les Strings
-    private String[] tab_choix={"Maaf","infirmiers nuit","presentation services"};
+    private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","nombre total des médecins soignant au moins 3 malades ","rapport","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
     
     // Constructeurs
     public Fenetre(Connexion connex)
@@ -143,6 +143,65 @@ public class Fenetre extends JFrame implements ActionListener{
             {
                 try {
                     Tableau d = a.presentationServices(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                    
+                      case 3:
+            {
+                try {
+                    Tableau e = a.NombreLitMoyen(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                    
+                     case 4:
+            {
+                try {
+                    Tableau e = a.SalaireMoyen(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                    
+                       case 5:
+            {
+                try {
+                    Tableau e = a.NombreTotalMedecins(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                    
+                    case 6:
+            {
+                try {
+                    Tableau e = a.Rapport(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                    
+                    case 7:
+            {
+                try {
+                    Tableau e = a.MedecinsAvecMalade(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                     case 8:
+            {
+                try {
+                    Tableau e = a.MedecinsSansMalade(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
