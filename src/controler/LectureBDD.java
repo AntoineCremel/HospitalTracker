@@ -1,5 +1,6 @@
 package controler;
 
+import controler.container.Statistiques;
 import java.sql.SQLException;
 import modele.Connexion;
 import java.util.ArrayList;
@@ -273,6 +274,19 @@ public class LectureBDD {
                 "Services");
         
         return tab;
+    }
+    /// Fonctions camemberts
+    /*
+    Cette section regroupe les fonctions qui sont utilisées pour former des
+    graphes de reporting
+    */
+    public static Statistiques repartitionSpecialitesDocteurs(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction permettant de récupérer le nombre de médecin pour chaque
+        spécialité.
+        */
     }
     /// Support de l'écriture
     /*
