@@ -29,7 +29,7 @@ public class Statistiques {
     // Accesseurs en écriture
     public void addElement(String name, int value)
     {
-        /*
+        /**
         Ajoute l'élément de nom name et de valeur value à l'objet statistique.
         */
         this.categories.add(name);
@@ -39,7 +39,7 @@ public class Statistiques {
     // Accesseurs en lecture
     public ArrayList getElement(int i)
     {
-        /*
+        /**
         Renvoit un ArrayList contenant en case 0 un nom de categorie et en case
         1 une valeur.
         */
@@ -52,14 +52,14 @@ public class Statistiques {
     }
     public String getCategorie(int i)
     {
-        /*
+        /**
         Fonction pour récupérer la catégorie de la case numero i
         */
         return (String)categories.get(i);
     }
     public int getNumber(int i)
     {
-        /*
+        /**
         Fonction pour récupérer le chiffre de la case i
         */
         return (int)numbers.get(i);
