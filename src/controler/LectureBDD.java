@@ -101,12 +101,6 @@ public class LectureBDD {
     }
     
     
-    /// Support de l'écriture
-    /*
-    Cette section de la classe contient des méthodes qui fonctionnent en support
-    des méthodes d'écriture.
-    */
-    
     public static Tableau NombreLitMoyen(Connexion connex)
             throws SQLException
     {

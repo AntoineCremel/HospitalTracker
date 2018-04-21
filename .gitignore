@@ -1,4 +1,4 @@
 /build/
 /dist/
-src/controler/Test.java
-nbproject/private/
+/src/controler/Test.java
+/nbproject/private/*
