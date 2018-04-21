@@ -48,7 +48,6 @@ abstract class EcritureBDD {
         sensitive et ne fait pas d'auto correct
         */
         // 0 Variables
-        String requete;
         int IDDocteur;
         int IDMalade;
         ArrayList<ArrayList<String>> lecture;
@@ -65,20 +64,37 @@ abstract class EcritureBDD {
         LectureBDD.assertSingle(lecture);
         IDMalade = Integer.parseInt(lecture.get(0).get(0));
         
-        // 1 Composition de la requete d'écriture
-        requete = "INSERT INTO soigne (no_docteur, no_malade)" +
-                "VALUES(" + IDDocteur + ", " + IDMalade + ");";
-        // 2 Execution de la requête
-        connex.executeUpdate(requete);
-        
+        // 1 Appel de la fonction d'écriture :
+        affectDocteurPatient(connex, IDDocteur, IDMalade);
     }
     public static void engagerDocteur(Connexion connex, String nom,
-            String prenom, String tel, String adresse, String sepcialite)
+            String prenom, String tel, String adresse, String specialite)
+            throws SQLException
     {
         /*
         Fonction utilisée pour ajouter un docteur à la base de données.
-        Reçoit en paramètre toutes les 
+        Reçoit en paramètre toutes les informations d'un médecin dans la base
+        de données.
         */
+        // 0 Variables
+        String requete;
+        int newID;
+        
+        // 1 Récupération de l'ID la plus haute :
+        newID = LectureBDD.getHighestID(connex, "employe") + 1;
+        
+        // 2 Composition de la requête sur la table employe
+        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel, "
+                + ") VALUES ("+newID+", "+nom+", "+prenom+", "
+                +adresse+", "+tel+")";
+        
+        // 3 Ajout du médecin à la table employé
+        connex.executeUpdate(requete);
+        
+        // 4 A présent il faut ajouter le médecin à la table médecin
+        connex.executeUpdate("INSERT INTO docteur (numero, sepcialite) "
+            + "VALUES (" + newID + ", " + specialite + ")");
     }
+    
 }
 

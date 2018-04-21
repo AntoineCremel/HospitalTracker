@@ -324,6 +324,25 @@ public class LectureBDD {
         
         return retour;
     }
+    public static int getHighestID(Connexion connex, String table)
+            throws SQLException
+    {
+        /*
+        Fonction chargée de détecter et de renvoyer l'ID le plus haut dans une
+        table donnée.
+        */
+        // 0 Variables
+        int retour;
+        ArrayList<ArrayList<String>> lecture;
+        
+        // 1 Récupération de la requête
+        lecture = connex.remplirChampsRequete("SELECT MAX(numero) FROM "+table);
+        
+        // 2 Récupération de l'ID la plus haute
+        retour = Integer.parseInt(lecture.get(0).get(0));
+        
+        return retour;
+    }
     // Fonctions d'erreur
     public static void assertSingle(ArrayList<ArrayList<String>> queryResponse)
             throws AmbivalentQueryException, NullQueryException
