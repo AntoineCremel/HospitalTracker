@@ -50,4 +50,18 @@ public class Statistiques {
         
         return retour;
     }
+    public String getCategorie(int i)
+    {
+        /*
+        Fonction pour récupérer la catégorie de la case numero i
+        */
+        return (String)categories.get(i);
+    }
+    public int getNumber(int i)
+    {
+        /*
+        Fonction pour récupérer le chiffre de la case i
+        */
+        return (int)numbers.get(i);
+    }
 }
