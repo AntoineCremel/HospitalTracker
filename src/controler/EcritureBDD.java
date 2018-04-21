@@ -95,6 +95,33 @@ abstract class EcritureBDD {
         connex.executeUpdate("INSERT INTO docteur (numero, sepcialite) "
             + "VALUES (" + newID + ", " + specialite + ")");
     }
-    
+    public static void retirerMalade(Connexion connex, String nom)
+            throws SQLException, AmbivalentQueryException, NullQueryException
+    {
+        /*
+        Méthode qui sert à retirer un malade de la liste des hospitatlisations.
+        Le malade sera gardé dans la liste des malades, afin de permettre à l'
+        hopital de garder une liste des patients qui ont été hospitatlisés chez
+        lui.
+        */
+        // 0 Variables
+        String requete;
+        ArrayList<ArrayList<String>> lecture;
+        int patientID;
+        
+        // 1 Récupération de l'ID du patient
+        lecture = LectureBDD.patientByName(connex, nom);
+        // 1.1 Vérification de la requête a renvoyé un résultat valide
+        LectureBDD.assertSingle(lecture);
+        // 1.2 Récupération de l'ID
+        patientID = Integer.parseInt(lecture.get(0).get(0));
+        
+        // 2 Génération de la requête d'effaçage
+        requete = "DELETE FROM hospitalisation WHERE no_malade = "
+                + patientID;
+        
+        // 3 Execution de la requete
+        connex.executeUpdate(requete);
+    }
 }
 
