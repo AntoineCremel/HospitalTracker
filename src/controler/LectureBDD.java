@@ -10,7 +10,7 @@ import vue.Tableau;
  * 
  * @author Antoine
  */
-public class LectureBDD {
+public abstract class LectureBDD {
     
     /// Recherche
     /*

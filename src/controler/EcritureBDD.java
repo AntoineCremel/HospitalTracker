@@ -11,7 +11,7 @@ import modele.Connexion;
  * 
  * @author Antoine
  */
-abstract class EcritureBDD {
+public abstract class EcritureBDD {
     public static void affectDocteurPatient(Connexion connex, int IDDocteur,
             int IDMalade)
             throws SQLException

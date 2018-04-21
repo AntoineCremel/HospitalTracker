@@ -2,6 +2,7 @@ package vue;
 
 import controler.AmbivalentQueryException;
 import controler.LectureBDD;
+import controler.EcritureBDD;
 import controler.NullQueryException;
 import java.awt.*;
 import java.awt.event.*;
