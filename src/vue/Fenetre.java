@@ -32,24 +32,35 @@ public class Fenetre extends JFrame implements ActionListener{
     private JButton graphe1;
     private JButton graphe2;
     private JButton graphe3;
+    private JButton clear;
     private JButton ok;
+    private JButton modif;
     
     //les zones de textes
     private JTextField request;
+    private JTextField docteur;
+    private JTextField patient;
     
     //les textes
     private JLabel bienvenue1;
     private JLabel choixRequest;
     private JLabel texteRequete;
+    private JLabel nomDocteur;
+    private JLabel nomPatient;
     
     //les combos
     private JComboBox choixRequete;
+    private JComboBox choixModif;
+    private JComboBox choixAjout;
+    private JComboBox choixSuppr;
     
     private JTabbedPane onglet;
    
     //les Strings
     private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","rapport entre le nombre d'infirmières et le nombre de malades","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
-    
+    private String[] tab_modif={"Affecter docteur à malade","requête 2","requête 3"};
+    private String[] tab_ajout={"Engager un docteur","requête 2","requête 3"};
+    private String[] tab_suppr={"requête 1","requête 2","requête 3"};
     // Constructeurs
     public Fenetre(Connexion connex)
     {
@@ -65,7 +76,9 @@ public class Fenetre extends JFrame implements ActionListener{
         graphe1 = new JButton("GRAPHE1");
         graphe2 = new JButton("GRAPHE2");
         graphe3 = new JButton("GRAPHE3");
+        clear = new JButton("CLEAR");
         ok = new JButton("ok");
+        modif = new JButton("Modifier");
     
     //On crée les zones de texte
         request = new JTextField(15);
@@ -77,15 +90,29 @@ public class Fenetre extends JFrame implements ActionListener{
         
     //On crée les combos box
         choixRequete = new JComboBox(tab_choix);
+        choixAjout = new JComboBox(tab_ajout);
+        choixModif = new JComboBox(tab_modif);
+        choixSuppr = new JComboBox(tab_suppr);
+        
+        nomDocteur = new JLabel("Nom du docteur");
+        nomPatient = new JLabel("Nom du patient");
+        docteur = new JTextField(15);
+        patient = new JTextField(15);
         
         choixRequete.addActionListener(this);
+        choixAjout.addActionListener(this);
+        choixModif.addActionListener(this);
+        choixSuppr.addActionListener(this);
         graphe1.addActionListener(this);
         graphe2.addActionListener(this);
+        graphe3.addActionListener(this);
+        clear.addActionListener(this);
+        modif.addActionListener(this);
 
         // on crée les panneaux
         choix = new JPanel(new GridLayout(15,2,15,15));
         ajout = new JPanel();
-        modification = new JPanel();
+        modification = new JPanel(new GridLayout(15,4,15,15));
         supprimer = new JPanel();
         graphe = new JPanel();
         bienvenue = new JPanel();
@@ -98,6 +125,11 @@ public class Fenetre extends JFrame implements ActionListener{
         choix.add(graphe1);
         choix.add(graphe2);
         choix.add(graphe3);
+        choix.add(clear);
+        modification.add(choixModif);
+        modification.add(modif);
+        ajout.add(choixAjout);
+        supprimer.add(choixSuppr);
         onglet = new JTabbedPane();
         Camembert ab = new Camembert("test");
         JPanel test = new JPanel();
@@ -224,10 +256,46 @@ public class Fenetre extends JFrame implements ActionListener{
                 JPanel test = new JPanel();
                 test = ab.createDemoPanel();
                 graphe.add(test);
+                graphe.repaint();
+               
             }
             if(source == graphe2){
+                //coder ici
+            }
+            if(source == graphe3){
+                //coder ici
+            }
+            if(source == clear){
                 graphe.removeAll();
                 graphe.repaint();
+            }
+            
+            if(source == choixModif){
+                int index = choixModif.getSelectedIndex();
+                switch(index){
+                    case 0:
+                        
+                        modification.add(nomDocteur);
+                        modification.add(docteur);
+                        modification.add(nomPatient);
+                        modification.add(patient);
+                        modification.repaint();
+                            
+                        break;
+                    case 1 :
+
+                        break;
+                        }
+                }
+                if(source == modif){
+                                modification.remove(nomDocteur);
+                                modification.remove(docteur);
+                                modification.remove(nomPatient);
+                                modification.remove(patient);
+                                //modification.remove(modif);
+                                //modification.removeAll();
+                                modification.repaint();
+                                }
             }
         }
         /*if(ae.getSource().equals(fen.getOk())){
@@ -239,4 +307,3 @@ public class Fenetre extends JFrame implements ActionListener{
                     Logger.getLogger(HospitalTracker.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }*/
-    }
