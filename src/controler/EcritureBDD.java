@@ -28,7 +28,7 @@ public abstract class EcritureBDD {
         String requete;
         // 1 Composition de la requete d'écriture
         requete = "INSERT INTO soigne (no_docteur, no_malade)" +
-                "VALUES(" + IDDocteur + ", " + IDMalade + ");";
+                "VALUES(" + IDDocteur + ", " + IDMalade + ")";
         // 2 Execution de la requête
         connex.executeUpdate(requete);
     }

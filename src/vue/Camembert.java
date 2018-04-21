@@ -5,9 +5,16 @@
  */
 package vue;   
 
+import controler.Reporting;
+import controler.container.Statistiques;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
+import modele.Connexion;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -22,13 +29,16 @@ import org.jfree.data.general.PieDataset;
  */
 public class Camembert  {
     private String title;
+    private static Connexion connex;
     /**
      * Default constructor.
      *
      * @param title  the frame title.
+     * @param connex
      */
-    public Camembert (String title) {
+    public Camembert (String title, Connexion connex) {
         this.title = title;
+        this.connex = connex;
     }
 
     /**
@@ -36,14 +46,33 @@ public class Camembert  {
      * 
      * @return A sample dataset.
      */
-    private static PieDataset createDataset() {
+    private static PieDataset createDataset(){
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("One", new Double(43.2));
-        dataset.setValue("Two", new Double(10.0));
+        ArrayList<String> docteur = new ArrayList();
+        ArrayList<String> nombre = new ArrayList();
+        Statistiques stat = new Statistiques();
+        try {
+            stat = Reporting.repartitionSpecialitesDocteurs(connex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Camembert.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        docteur = stat.getElement(1);
+        nombre = stat.getElement(0);
+        for(int i=0; i<docteur.size();i++){
+            double j;
+            String test = docteur.get(i);
+            String nbr = nombre.get(i);
+            j = Double.parseDouble(nbr);
+            System.out.println(test);
+            System.out.println(j);
+            dataset.setValue(test,j);
+        }
+        
+        /*dataset.setValue("Two", new Double(10.0));
         dataset.setValue("Three", new Double(27.5));
         dataset.setValue("Four", new Double(17.5));
         dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));
+        dataset.setValue("Six", new Double(19.4));*/
         return dataset;        
     }
     
@@ -78,7 +107,7 @@ public class Camembert  {
      * 
      * @return A panel.
      */
-    public static JPanel createDemoPanel() {
+    public static JPanel createDemoPanel(){
         JFreeChart chart = createChart(createDataset());
         return new ChartPanel(chart);
     }

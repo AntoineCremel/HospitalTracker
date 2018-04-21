@@ -23,7 +23,7 @@ public abstract class Reporting {
         Statistiques retour = new Statistiques();
         
         // 1 Création de la requete
-        requete = "SELECT COUNT(numero),specialite FROM docteur GROUP BY"
+        requete = "SELECT COUNT(numero),specialite FROM docteur GROUP BY "
                 + "specialite";
         // 2 Récupération du résultat
         lecture = connex.remplirChampsRequete(requete);

@@ -77,8 +77,6 @@ public class Fenetre extends JFrame implements ActionListener{
         setTitle("HospitalTracker");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        LectureBDD a = new LectureBDD();
         this.connex = connex;
         
     //On crée les boutons
@@ -142,7 +140,7 @@ public class Fenetre extends JFrame implements ActionListener{
         ajout.add(choixAjout);
         supprimer.add(choixSuppr);
         onglet = new JTabbedPane();
-        Camembert ab = new Camembert("test");
+        Camembert ab = new Camembert("Médecins par spécialité",connex);
         JPanel test = new JPanel();
         test = ab.createDemoPanel();
         graphe.add(test);
@@ -192,7 +190,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     nom = "MAAF";
             {
                 try {
-                    Tableau b = a.maladesMutuelle(connex,nom);
+                    Tableau b = LectureBDD.maladesMutuelle(connex,nom);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -202,7 +200,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 case 1:
             {
                 try {
-                    Tableau c = a.infirmiersNuit(connex);
+                    Tableau c = LectureBDD.infirmiersNuit(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -212,7 +210,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 case 2:
             {
                 try {
-                    Tableau d = a.presentationServices(connex);
+                    Tableau d = LectureBDD.presentationServices(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -222,7 +220,7 @@ public class Fenetre extends JFrame implements ActionListener{
                       case 3:
             {
                 try {
-                    Tableau e = a.NombreLitMoyen(connex);
+                    Tableau e = LectureBDD.NombreLitMoyen(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -232,7 +230,7 @@ public class Fenetre extends JFrame implements ActionListener{
                      case 4:
             {
                 try {
-                    Tableau f = a.SalaireMoyen(connex);
+                    Tableau f = LectureBDD.SalaireMoyen(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -242,7 +240,7 @@ public class Fenetre extends JFrame implements ActionListener{
                        case 5:
             {
                 try {
-                    Tableau g = a.NombreTotalMedecins(connex);
+                    Tableau g = LectureBDD.NombreTotalMedecins(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -252,7 +250,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     case 6:
             {
                 try {
-                    Tableau h = a.Rapport(connex);
+                    Tableau h = LectureBDD.Rapport(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -262,7 +260,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     case 7:
             {
                 try {
-                    Tableau i = a.MedecinsAvecMalade(connex);
+                    Tableau i =LectureBDD.MedecinsAvecMalade(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -271,7 +269,7 @@ public class Fenetre extends JFrame implements ActionListener{
                      case 8:
             {
                 try {
-                    Tableau j = a.MedecinsSansMalade(connex);
+                    Tableau j = LectureBDD.MedecinsSansMalade(connex);
                 } catch (SQLException ex) {
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -283,7 +281,7 @@ public class Fenetre extends JFrame implements ActionListener{
             }
         }
             if(source == graphe1){
-                Camembert ab = new Camembert("test");
+                Camembert ab = new Camembert("test",connex);
                 JPanel test = new JPanel();
                 test = ab.createDemoPanel();
                 graphe.add(test);
@@ -321,21 +319,21 @@ public class Fenetre extends JFrame implements ActionListener{
                         }
                 }
                 if(source == modif){
-            //try {
-                //EcritureBDD.affectDocteurPatient(connex,docteur.getText(),patient.getText());
+            try {
+                EcritureBDD.affectDocteurPatient(connex,docteur.getText(),patient.getText());
                 modification.remove(nomDocteur);
                 modification.remove(docteur);
                 modification.remove(nomPatient);
                 modification.remove(patient);
                 modification.remove(modif);
                 modification.repaint();
-            /*} catch (SQLException ex) {
+            } catch (SQLException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             } catch (AmbivalentQueryException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NullQueryException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+            }
                                 
                                 }
                 
@@ -362,7 +360,11 @@ public class Fenetre extends JFrame implements ActionListener{
     
                 }
                 if(source == update1){
-                    EcritureBDD.engagerDocteur(connex, prenomDocteurUpdate.getText(), nomDocteurUpdate.getText(), telDocteurUpdate.getText(), adresseDocteurUpdate.getText(), speDocteurUpdate.getText());
+            try {
+                EcritureBDD.engagerDocteur(connex, prenomDocteurUpdate.getText(), nomDocteurUpdate.getText(), telDocteurUpdate.getText(), adresseDocteurUpdate.getText(), speDocteurUpdate.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            }
                     ajout.remove(prenomDocteur);
                     //remove le reste
                     ajout.repaint();
