@@ -410,6 +410,53 @@ public abstract class LectureBDD {
         return tab;
     }
     
+    public static Tableau Malade3(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la alade soigné par plus de 3 médecins donner le nombre total de ses--      médecins ainsi que le nombre correspondant de spécialités médicales concernées.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"prenom", "nom"};
+        
+        // 1 Composition de la requete
+        requete = " select    m.nom, m.prenom, count(*) as nb_soignants,           count(distinct d.specialite) as nb_specialites from      docteur d, soigne so, malade m where     d.numero = so.no_docteur and       so.no_malade = m.numero group by  m.nom, m.prenom having    count(*) > 3 ;";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Malade soigné par plus de 3 médecins,noms et spécialités des  médecins");
+        
+        return tab;
+    }
+    
+    public static Tableau BatimentB(Connexion connex)
+            throws SQLException
+    {
+        /*
+        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
+        travaillant pendant la rotation de nuit.
+        */
+        // 0 Variables
+        ArrayList<ArrayList<String>> retour;
+        Tableau tab;
+        String requete;
+        String[] entete = {"batiment", "numero chambre"};
+        
+        // 1 Composition de la requete
+        requete = "select    h.no_chambre, h.lit, s.nom, m.prenom, m.nom, m.mutuelle from      service s, hospitalisation h, malade m where     s.batiment = 'B'and       s.code = h.code_service and       h.no_malade = m.numero and       m.mutuelle like 'MN%' ;\n" +
+"\n" +
+" " +
+"";
+        
+        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
+        
+        tab = new Tableau(retour, entete, "Caractéristiques du bâtiment B");
+        
+        return tab;
+    }
     
     public static Tableau litsOcupeBatiment(Connexion connex, String batiment,
             String debutMutuelle)
