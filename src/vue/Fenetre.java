@@ -90,7 +90,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private JTabbedPane onglet;
    
     //les Strings
-    private String[] tab_choix={"Afficher les patients en fonction de leur mutuelle","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","Rapport entre le nombre d'infirmières et le nombre de malades","Docteurs ayant au moins un malade hospitalisé","Medecins Sans Malade"};
+    private String[] tab_choix={"Afficher les patients en fonction de leur mutuelle","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","Rapport entre le nombre d'infirmières et le nombre de malades","Docteurs ayant au moins un malade hospitalisé","Medecins Sans Malade","Bâtiments avec des malades","bâtiment numéro et nombre des lits","Chambres avec lits dispo en  Cardio","Prénom ,nom des malades soignés par le directeur du service","Bâtiment et numéro des chambres vides","Nombre de malades hospitalisés par chaque docteur","docteurs ayant un malade hospitalisé dans chaque chambre dont l'infirmier surveillant est « Muller »"};
     private String[] tab_modif={"Affecter docteur à malade","requête 2","requête 3"};
     private String[] tab_ajout={"Engager un docteur","Ajouter malade","requête 3"};
     private String[] tab_suppr={"Retirer malade","requête 2","requête 3"};
@@ -315,7 +315,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                     case 8:
+                     case 9:
             {
                 try {
                     Tableau j = LectureBDD.MedecinsSansMalade(connex);
@@ -323,6 +323,64 @@ public class Fenetre extends JFrame implements ActionListener{
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            
+            break;
+            
+               case 10:
+            {
+                try {
+                    Tableau j = LectureBDD.BatimentMalade(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                      case 11:
+            {
+                try {
+                    Tableau j = LectureBDD.NombreMoyenA(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                      case 12:
+            {
+                try {
+                    Tableau j = LectureBDD.LitCardio(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                      case 13:
+            {
+                try {
+                    Tableau j = LectureBDD.ChambreVide(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                     case 14:
+            {
+                try {
+                    Tableau j = LectureBDD.MaladeParDocteur(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+                     case 16:
+            {
+                try {
+                    Tableau j = LectureBDD.NomInfirmier(connex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+                    break;
+
                 default:
                     System.out.println("erreur");
                     break;    
