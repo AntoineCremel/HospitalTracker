@@ -41,12 +41,17 @@ public class Fenetre extends JFrame implements ActionListener{
     private JButton ok;
     private JButton modif;
     private JButton update1;
+    private JButton update2;
     private JButton suppr1;
     
     //les zones de textes
     private JTextField request;
     private JTextField docteur;
     private JTextField patient;
+    private JTextField prePatient;
+    private JTextField tPatient;
+    private JTextField adrPatient;
+    private JTextField mutPatient;
     private JTextField prenomDocteurUpdate;
     private JTextField nomDocteurUpdate;
     private JTextField telDocteurUpdate;
@@ -59,6 +64,10 @@ public class Fenetre extends JFrame implements ActionListener{
     private JLabel texteRequete;
     private JLabel nomDocteur;
     private JLabel nomPatient;
+    private JLabel prenomPatient;
+    private JLabel adressePatient;
+    private JLabel telPatient;
+    private JLabel mutuellePatient;
     private JLabel prenomDocteur;
     private JLabel nomDoc;
     private JLabel telDocteur;
@@ -77,7 +86,7 @@ public class Fenetre extends JFrame implements ActionListener{
     //les Strings
     private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","rapport entre le nombre d'infirmières et le nombre de malades","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
     private String[] tab_modif={"Affecter docteur à malade","requête 2","requête 3"};
-    private String[] tab_ajout={"Engager un docteur","requête 2","requête 3"};
+    private String[] tab_ajout={"Engager un docteur","Ajouter malade","requête 3"};
     private String[] tab_suppr={"Retirer malade","requête 2","requête 3"};
     
     // Constructeurs de notre fenêtre
@@ -98,14 +107,37 @@ public class Fenetre extends JFrame implements ActionListener{
         modif = new JButton("Modifier");
         update1 = new JButton("Ajout");
         suppr1 = new JButton("Retirer");
+        update2 = new JButton("Ajout");
     
     //On crée les zones de texte
         request = new JTextField(15);
+        docteur = new JTextField(15);
+        patient = new JTextField(15);
+        prePatient = new JTextField(15);
+        tPatient = new JTextField(15);
+        adrPatient = new JTextField(15);
+        mutPatient = new JTextField(15);
+        prenomDocteurUpdate = new JTextField(15);
+        nomDocteurUpdate = new JTextField(15);
+        telDocteurUpdate = new JTextField(15);
+        adresseDocteurUpdate = new JTextField(15);
+        speDocteurUpdate = new JTextField(15);
     
     //On crée les labels
         bienvenue1 = new JLabel("Bienvenue que souhaitez-vous faire ?");
         choixRequest = new JLabel("Choisissez votre requête");
         texteRequete = new JLabel("Entrez le texte de votre requête");
+        nomDocteur = new JLabel("Nom du docteur");
+        nomPatient = new JLabel("Nom du patient");
+        prenomPatient = new JLabel("Prenom du patient");
+        prenomDocteur = new JLabel("Prenom du docteur");
+        nomDoc = new JLabel("Nom du docteur");
+        telDocteur = new JLabel("Telephone du docteur");
+        adresseDocteur = new JLabel("Adresse du docteur");
+        speDocteur = new JLabel("Specialite du docteur");
+        adressePatient = new JLabel("Adresse du patient");
+        telPatient = new JLabel("Telephone du patient");
+        mutuellePatient = new JLabel("Mutuelle du patient");
         
     //On crée les combos box
         choixRequete = new JComboBox(tab_choix);
@@ -113,21 +145,9 @@ public class Fenetre extends JFrame implements ActionListener{
         choixModif = new JComboBox(tab_modif);
         choixSuppr = new JComboBox(tab_suppr);
         
-        nomDocteur = new JLabel("Nom du docteur");
-        nomPatient = new JLabel("Nom du patient");
-        prenomDocteur = new JLabel("Prenom");
-        nomDoc = new JLabel("Nom");
-        telDocteur = new JLabel("Telephone");
-        adresseDocteur = new JLabel("Adresse");
-        speDocteur = new JLabel("Specialite");
+       
         
-        docteur = new JTextField(15);
-        patient = new JTextField(15);
-        prenomDocteurUpdate = new JTextField(15);
-        nomDocteurUpdate = new JTextField(15);
-        telDocteurUpdate = new JTextField(15);
-        adresseDocteurUpdate = new JTextField(15);
-        speDocteurUpdate = new JTextField(15);
+        
                     
     
     //On ajoute les ActionListener pour les boutons et comboBox
@@ -141,6 +161,7 @@ public class Fenetre extends JFrame implements ActionListener{
         clear.addActionListener(this);
         modif.addActionListener(this);
         update1.addActionListener(this);
+        update2.addActionListener(this);
         suppr1.addActionListener(this);
 
         // on crée les panneaux et on les organise
@@ -373,6 +394,19 @@ public class Fenetre extends JFrame implements ActionListener{
                             ajout.revalidate();
                             break;
                         case 1 :
+                            ajout.add(nomPatient);
+                            ajout.add(patient);
+                            ajout.add(prenomPatient);
+                            ajout.add(prePatient);
+                            ajout.add(adressePatient);
+                            ajout.add(adrPatient);
+                            ajout.add(telPatient);
+                            ajout.add(tPatient);
+                            ajout.add(mutuellePatient);
+                            ajout.add(mutPatient);
+                            ajout.add(update2);
+                            ajout.repaint();
+                            ajout.revalidate();
                             break;
                     }
     
@@ -384,10 +418,10 @@ public class Fenetre extends JFrame implements ActionListener{
                     ajout.remove(nomDocteurUpdate);
                     ajout.remove(prenomDocteur);
                     ajout.remove(prenomDocteurUpdate);
-                    ajout.remove(telDocteur);
-                    ajout.remove(telDocteurUpdate);
                     ajout.remove(adresseDocteur);
                     ajout.remove(adresseDocteurUpdate);
+                    ajout.remove(telDocteur);
+                    ajout.remove(telDocteurUpdate);
                     ajout.remove(speDocteur);
                     ajout.remove(speDocteurUpdate);
                     ajout.remove(update1);
@@ -397,6 +431,25 @@ public class Fenetre extends JFrame implements ActionListener{
             }
                     
                 }
+               if(source == update2){
+            try {
+                EcritureBDD.ajouterMalade(connex, patient.getText(), prePatient.getText(), adrPatient.getText(), tPatient.getText(),  mutPatient.getText());
+                    ajout.remove(nomPatient);
+                    ajout.remove(patient);
+                    ajout.remove(prenomPatient);
+                    ajout.remove(prePatient);
+                    ajout.remove(telPatient);
+                    ajout.remove(tPatient);
+                    ajout.remove(adressePatient);
+                    ajout.remove(adrPatient);
+                    ajout.remove(mutuellePatient);
+                    ajout.remove(mutPatient);
+                    ajout.remove(update2);
+                    ajout.repaint();
+            } catch (SQLException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+               }
             if(source == choixSuppr){
                 supprimer.add(nomPatient);
                 supprimer.add(patient);
