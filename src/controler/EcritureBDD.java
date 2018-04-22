@@ -123,5 +123,24 @@ public abstract class EcritureBDD {
         // 3 Execution de la requete
         connex.executeUpdate(requete);
     }
+    public static void ajouterMalade(Connexion connex, String nom, 
+            String prenom, String adresse, String telephone, String mutuelle)
+            throws SQLException
+    {
+        /**
+         * Méthode qui permet d'ajouter un malade à la liste
+         */
+        // 0 Variables
+        String requete;
+        int newID;
+        
+        // 1 Récupération d'un numéro à donner au malade
+        newID = LectureBDD.getHighestID(connex, "employe") + 1;
+        
+        requete = "INSERT INTO malade (numero, nom, prenom, adresse, tel,"
+                + " mutuelle) VALUES ("+newID+", '"+nom+"', '"+prenom+"', '"+
+                adresse+"', '"+telephone+"', '"+mutuelle+"')";
+        
+        connex.executeUpdate(requete);
+    }
 }
-
