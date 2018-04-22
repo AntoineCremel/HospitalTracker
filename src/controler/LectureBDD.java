@@ -421,8 +421,8 @@ public abstract class LectureBDD {
             throws SQLException
     {
         /**
-        Fonction renvoyant la liste des lits occupés dans le batiment par des
-        malades dont la mutuelle commence par debutMutuelle
+            Fonction renvoyant la liste des lits occupés dans le batiment par des
+            malades dont la mutuelle commence par debutMutuelle
         */
         // 0 Variables
         Tableau tab;
@@ -446,7 +446,7 @@ public abstract class LectureBDD {
     }
     
     /// Support de l'écriture
-    /*
+    /**
     Cette section de la classe contient des méthodes qui fonctionnent en support
     des méthodes d'écriture.
     */

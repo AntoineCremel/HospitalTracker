@@ -6,7 +6,7 @@
 package controler;
 
 /**
- *
+ * Classe contenant l'exception AmbivalentQueryException
  * @author Antoine
  */
 public class AmbivalentQueryException extends Exception{

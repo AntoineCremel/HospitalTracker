@@ -205,6 +205,7 @@ public class Fenetre extends JFrame implements ActionListener{
         ajout.add(choixAjout);
         supprimer.add(choixSuppr);
         onglet = new JTabbedPane();
+        //On crée le camembert qu'on affiche
         Camembert ab = new Camembert("Médecins par spécialité",connex);
         JPanel test = new JPanel();
         test = ab.createDemoPanel();
@@ -238,6 +239,8 @@ public class Fenetre extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
         String nom;
+        //ComboBox pour choisir la requête
+        //Chaque Case affiche une requête différente
         if(source == choixRequete){
             texteRequete.setText("Entrer le texte de la requête");
             choix.repaint();
@@ -389,6 +392,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     break;    
             }
         }
+            //Bouton pour afficher la requete 1 en fonction de la mutuelle entrée par l'utilisateur
             if(source == lecture){
             {
                 try {
@@ -398,6 +402,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
             }
+            //Afficher le premier graphe
             if(source == graphe1){
                 Camembert ab = new Camembert("test",connex);
                 JPanel test = new JPanel();
@@ -414,10 +419,11 @@ public class Fenetre extends JFrame implements ActionListener{
                 //coder ici
             }
             if(source == clear){
+                //On clear les graphes
                 graphe.removeAll();
                 graphe.repaint();
             }
-            
+                //On choisit quelle modif faire
             if(source == choixModif){
                 int index = choixModif.getSelectedIndex();
                 switch(index){
@@ -440,13 +446,16 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
                 if(source == modif){
             try {
+                //On effectue la requête
                 EcritureBDD.affectDocteurPatient(connex,docteur.getText(),patient.getText());
+                // On remove le tout
                 modification.remove(nomDocteur);
                 modification.remove(docteur);
                 modification.remove(nomPatient);
                 modification.remove(patient);
                 modification.remove(modif);
                 modification.repaint();
+                //On catch les exceptions possibles
             } catch (SQLException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             } catch (AmbivalentQueryException ex) {
@@ -460,7 +469,7 @@ public class Fenetre extends JFrame implements ActionListener{
                     int index = choixAjout.getSelectedIndex();
                     switch(index){
                         case 0:
-                           
+                            // On ajoute les champs requis
                             ajout.add(nomDoc);
                             ajout.add(nomDocteurUpdate);
                             ajout.add(prenomDocteur);
@@ -472,10 +481,12 @@ public class Fenetre extends JFrame implements ActionListener{
                             ajout.add(speDocteur);
                             ajout.add(speDocteurUpdate);
                             ajout.add(update1);
+                            //On les affiche dans le panneau
                             ajout.repaint();
                             ajout.revalidate();
                             break;
                         case 1 :
+                            //On ajoute les éléments au panel
                             ajout.add(namePatient);
                             ajout.add(nPatient);
                             ajout.add(prenomPatient);
@@ -487,6 +498,7 @@ public class Fenetre extends JFrame implements ActionListener{
                             ajout.add(mutuellePatient);
                             ajout.add(mutPatient);
                             ajout.add(update2);
+                            //On les affiche
                             ajout.repaint();
                             ajout.revalidate();
                             break;
@@ -496,6 +508,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 if(source == update1){
             try {
                 EcritureBDD.engagerDocteur(connex,nomDocteurUpdate.getText(), prenomDocteurUpdate.getText(), telDocteurUpdate.getText(), adresseDocteurUpdate.getText(), speDocteurUpdate.getText());
+                    //On efface les éléments
                     ajout.remove(nomDoc);
                     ajout.remove(nomDocteurUpdate);
                     ajout.remove(prenomDocteur);
@@ -507,15 +520,18 @@ public class Fenetre extends JFrame implements ActionListener{
                     ajout.remove(speDocteur);
                     ajout.remove(speDocteurUpdate);
                     ajout.remove(update1);
+                    //On remet le panel au propre
                     ajout.repaint();
             } catch (SQLException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
                     
                 }
+                //Si on clique sur le bouton on affiche la requête
                if(source == update2){
             try {
                 EcritureBDD.ajouterMalade(connex, nPatient.getText(), prePatient.getText(), adrPatient.getText(), tPatient.getText(),  mutPatient.getText());
+                    //On efface les parties ajoutées lors du choix
                     ajout.remove(namePatient);
                     ajout.remove(nPatient);
                     ajout.remove(prenomPatient);
@@ -527,11 +543,15 @@ public class Fenetre extends JFrame implements ActionListener{
                     ajout.remove(mutuellePatient);
                     ajout.remove(mutPatient);
                     ajout.remove(update2);
+                    //On repaint le panel
                     ajout.repaint();
+                    
+              //En cas de pb de requete SQL
             } catch (SQLException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
                }
+               //Si on fait le choix de la ComboBox
             if(source == choixSuppr){
                 supprimer.add(name2Patient);
                 supprimer.add(n2Patient);
@@ -539,6 +559,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 supprimer.repaint();
                 supprimer.revalidate();
             }
+            //Si le bouton est cliqué on affiche la requête
             if(source == suppr1){
             try {
                 EcritureBDD.retirerMalade(connex,n2Patient.getText());

@@ -93,7 +93,7 @@ public class Camembert  {
     }
     
     /**
-     * Créer un panel à retourner pour pouvoir être affiché
+     * Crée un panel à retourner pour pouvoir être affiché
      * 
      * @return A panel.
      */

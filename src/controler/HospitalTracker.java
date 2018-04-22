@@ -17,7 +17,7 @@ import vue.Login;
 import vue.Tableau;
 
 /**
- *
+ * Fonction contenant le main du projet
  * @author Antoine
  */
 public class HospitalTracker{
@@ -27,12 +27,11 @@ public class HospitalTracker{
     }
     
     /**
+     * Main qui crée la fenêtre login
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Login log = new Login();
     }
-    
-    // Methodes 
      
 }

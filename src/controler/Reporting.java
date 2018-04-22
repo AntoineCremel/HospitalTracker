@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import modele.Connexion;
 
 /**
- *
+ *  Fonction utilisée pour les données de la classe Camembert
  * @author Antoine
  */
 public abstract class Reporting {

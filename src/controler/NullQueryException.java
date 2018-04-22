@@ -6,7 +6,7 @@
 package controler;
 
 /**
- *
+ * Ckasse contenant l'exception NullQueryException
  * @author Antoine
  */
 public class NullQueryException extends Exception{
