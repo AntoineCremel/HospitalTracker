@@ -56,24 +56,9 @@ public class Camembert  {
         } catch (SQLException ex) {
             Logger.getLogger(Camembert.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        docteur = stat.getElement(1);
-//        nombre = stat.getElement(0);
         for(int i=0; i<stat.size();i++){
-            /*
-            double j;
-            String test = docteur.get(i);
-            String nbr = nombre.get(i);
-            j = Double.parseDouble(nbr);
-            System.out.println(test);
-            System.out.println(j);*/
             dataset.setValue(stat.getCategorie(i),stat.getNumber(i));
         }
-        
-        /*dataset.setValue("Two", new Double(10.0));
-        dataset.setValue("Three", new Double(27.5));
-        dataset.setValue("Four", new Double(17.5));
-        dataset.setValue("Five", new Double(11.0));
-        dataset.setValue("Six", new Double(19.4));*/
         return dataset;        
     }
     
@@ -87,7 +72,7 @@ public class Camembert  {
     private static JFreeChart createChart(PieDataset dataset) {
         
         JFreeChart chart = ChartFactory.createPieChart(
-            "Pie Chart Demo 1",  // chart title
+            "Répartition des médecins par catégorie",  // chart title
             dataset,             // data
             true,               // include legend
             true,
@@ -95,16 +80,16 @@ public class Camembert  {
         );
 
         PiePlot plot = (PiePlot) chart.getPlot();
-        plot.setLabelFont(new Font("SansSerif", Font.PLAIN, 12));
+        plot.setLabelFont(new Font("SansSerif", Font.BOLD, 13));
         plot.setNoDataMessage("No data available");
-        plot.setCircular(false);
-        plot.setLabelGap(0.02);
+        plot.setCircular(Boolean.TRUE);
+        plot.setLabelGap(0.05);
         return chart;
         
     }
     
     /**
-     * Creates a panel for the demo (used by SuperDemo.java).
+     * Créer un panel à retourner
      * 
      * @return A panel.
      */
