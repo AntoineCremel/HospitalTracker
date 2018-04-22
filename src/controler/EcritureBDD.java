@@ -84,7 +84,7 @@ public abstract class EcritureBDD {
         newID = LectureBDD.getHighestID(connex, "employe") + 1;
         
         // 2 Composition de la requête sur la table employe
-        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel, "
+        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel "
                 + ") VALUES ("+newID+", "+nom+", "+prenom+", "
                 +adresse+", "+tel+")";
         

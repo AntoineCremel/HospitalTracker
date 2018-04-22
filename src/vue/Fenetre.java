@@ -41,11 +41,17 @@ public class Fenetre extends JFrame implements ActionListener{
     private JButton ok;
     private JButton modif;
     private JButton update1;
+    private JButton suppr1;
     
     //les zones de textes
     private JTextField request;
     private JTextField docteur;
     private JTextField patient;
+    private JTextField prenomDocteurUpdate;
+    private JTextField nomDocteurUpdate;
+    private JTextField telDocteurUpdate;
+    private JTextField adresseDocteurUpdate;
+    private JTextField speDocteurUpdate;
     
     //les textes
     private JLabel bienvenue1;
@@ -54,6 +60,10 @@ public class Fenetre extends JFrame implements ActionListener{
     private JLabel nomDocteur;
     private JLabel nomPatient;
     private JLabel prenomDocteur;
+    private JLabel nomDoc;
+    private JLabel telDocteur;
+    private JLabel adresseDocteur;
+    private JLabel speDocteur;
     
     //les combos
     private JComboBox choixRequete;
@@ -68,7 +78,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private String[] tab_choix={"Maaf","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","rapport entre le nombre d'infirmières et le nombre de malades","docteurs ayant au moins un malade hospitalisé","Medecins soignant un Malade","Medecins Sans Malade"};
     private String[] tab_modif={"Affecter docteur à malade","requête 2","requête 3"};
     private String[] tab_ajout={"Engager un docteur","requête 2","requête 3"};
-    private String[] tab_suppr={"requête 1","requête 2","requête 3"};
+    private String[] tab_suppr={"Retirer malade","requête 2","requête 3"};
     
     // Constructeurs de notre fenêtre
     public Fenetre(Connexion connex)
@@ -87,6 +97,7 @@ public class Fenetre extends JFrame implements ActionListener{
         ok = new JButton("ok");
         modif = new JButton("Modifier");
         update1 = new JButton("Ajout");
+        suppr1 = new JButton("Retirer");
     
     //On crée les zones de texte
         request = new JTextField(15);
@@ -104,8 +115,20 @@ public class Fenetre extends JFrame implements ActionListener{
         
         nomDocteur = new JLabel("Nom du docteur");
         nomPatient = new JLabel("Nom du patient");
+        prenomDocteur = new JLabel("Prenom");
+        nomDoc = new JLabel("Nom");
+        telDocteur = new JLabel("Telephone");
+        adresseDocteur = new JLabel("Adresse");
+        speDocteur = new JLabel("Specialite");
+        
         docteur = new JTextField(15);
         patient = new JTextField(15);
+        prenomDocteurUpdate = new JTextField(15);
+        nomDocteurUpdate = new JTextField(15);
+        telDocteurUpdate = new JTextField(15);
+        adresseDocteurUpdate = new JTextField(15);
+        speDocteurUpdate = new JTextField(15);
+                    
     
     //On ajoute les ActionListener pour les boutons et comboBox
         choixRequete.addActionListener(this);
@@ -117,6 +140,8 @@ public class Fenetre extends JFrame implements ActionListener{
         graphe3.addActionListener(this);
         clear.addActionListener(this);
         modif.addActionListener(this);
+        update1.addActionListener(this);
+        suppr1.addActionListener(this);
 
         // on crée les panneaux et on les organise
         choix = new JPanel(new GridLayout(15,2,15,15));
@@ -146,7 +171,7 @@ public class Fenetre extends JFrame implements ActionListener{
         graphe.add(test);
         
         //On ajoute les panneaux au tableau de panneaux
-        onglet.add("modification",modification);
+        onglet.add("Modification",modification);
         onglet.add("Ajout",ajout);
         onglet.add("Supprimer",supprimer);
         onglet.add("Graphe",graphe);
@@ -173,16 +198,6 @@ public class Fenetre extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         Object source = ae.getSource();
         String nom;
-        JTextField prenomDocteurUpdate = new JTextField(15);
-                    JTextField nomDocteurUpdate = new JTextField(15);
-                    JTextField telDocteurUpdate = new JTextField(15);
-                    JTextField adresseDocteurUpdate = new JTextField(15);
-                    JTextField speDocteurUpdate = new JTextField(15);
-                    JLabel prenomDocteur = new JLabel("Prenom");
-                    JLabel nomDoc = new JLabel("Nom");
-                    JLabel telDocteur = new JLabel("Telephone");
-                    JLabel adresseDocteur = new JLabel("Adresse");
-                    JLabel speDocteur = new JLabel("Specialite");
         if(source == choixRequete){
             int index = choixRequete.getSelectedIndex();
             switch(index){
@@ -310,6 +325,7 @@ public class Fenetre extends JFrame implements ActionListener{
                         modification.add(patient);
                         modification.add(modif);
                         modification.repaint();
+                        modification.revalidate();
                         
                             
                         break;
@@ -333,18 +349,18 @@ public class Fenetre extends JFrame implements ActionListener{
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NullQueryException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                                
+            }  
                                 }
                 
                 if(source==choixAjout){
                     int index = choixAjout.getSelectedIndex();
                     switch(index){
                         case 0:
-                            ajout.add(prenomDocteur);
-                            ajout.add(prenomDocteurUpdate);
+                           
                             ajout.add(nomDoc);
                             ajout.add(nomDocteurUpdate);
+                            ajout.add(prenomDocteur);
+                            ajout.add(prenomDocteurUpdate);
                             ajout.add(telDocteur);
                             ajout.add(telDocteurUpdate);
                             ajout.add(adresseDocteur);
@@ -361,14 +377,46 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
                 if(source == update1){
             try {
-                EcritureBDD.engagerDocteur(connex, prenomDocteurUpdate.getText(), nomDocteurUpdate.getText(), telDocteurUpdate.getText(), adresseDocteurUpdate.getText(), speDocteurUpdate.getText());
+                EcritureBDD.engagerDocteur(connex,nomDocteurUpdate.getText(), prenomDocteurUpdate.getText(), telDocteurUpdate.getText(), adresseDocteurUpdate.getText(), speDocteurUpdate.getText());
+                    ajout.remove(nomDoc);
+                    ajout.remove(nomDocteurUpdate);
+                    ajout.remove(prenomDocteur);
+                    ajout.remove(prenomDocteurUpdate);
+                    ajout.remove(telDocteur);
+                    ajout.remove(telDocteurUpdate);
+                    ajout.remove(adresseDocteur);
+                    ajout.remove(adresseDocteurUpdate);
+                    ajout.remove(speDocteur);
+                    ajout.remove(speDocteurUpdate);
+                    ajout.remove(update1);
+                    ajout.repaint();
             } catch (SQLException ex) {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
-                    ajout.remove(prenomDocteur);
-                    //remove le reste
-                    ajout.repaint();
+                    
                 }
+            if(source == choixSuppr){
+                supprimer.add(nomPatient);
+                supprimer.add(patient);
+                supprimer.add(suppr1);
+                supprimer.repaint();
+                supprimer.revalidate();
+            }
+            if(source == suppr1){
+            try {
+                EcritureBDD.retirerMalade(connex,patient.getText());
+                supprimer.remove(nomPatient);
+                supprimer.remove(patient);
+                supprimer.remove(suppr1);
+                supprimer.repaint();
+            } catch (SQLException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (AmbivalentQueryException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NullQueryException ex) {
+                Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
             }
         }
         
