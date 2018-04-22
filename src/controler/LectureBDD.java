@@ -6,7 +6,11 @@ import modele.Connexion;
 import java.util.ArrayList;
 import vue.Tableau;
 /**
- *  Classe regroupant toutes les fonctions de lecture de la Base De Données
+ *  Classe regroupant toutes les fonctions de lecture de la Base De Données.
+ *  Classe abstraite.
+ *  
+ * @exception Toutes les fonctions de cette classe renvoient des SQLException,
+ *  qui peuvent se produire dans le cas de mauvaises requêtes.
  * 
  * @author Antoine
  */
@@ -21,16 +25,16 @@ public abstract class LectureBDD {
     public static Tableau maladesMutuelle(Connexion connex,
             String mutuelle) throws SQLException
     {
-        /*
+        /**
         Fonction chargée de renvoyer une liste des noms et prénoms 
         de tous les malades ayant une
         certaine mutuelle.
-        Entrées : 
-            - connex, une instance de la classe connexion permettant les
+            @param connex une instance de la classe connexion permettant les
             interactions avec la base de donnée.
-            - mutuelle, un string contenant le nom d'une mutuelle
-        Sorties :
-            - retour : Un ArrayList contenant des tableaux de deux cases :
+            @param mutuelle, un string contenant le nom d'une mutuelle
+            * 
+            * 
+            @return retour : Un ArrayList contenant des tableaux de deux cases :
             le nom est contenu dans la case 0, le prénom dans la case 1.
         */
         // 0 Variables
@@ -54,7 +58,7 @@ public abstract class LectureBDD {
     public static Tableau infirmiersNuit(Connexion connex)
             throws SQLException
     {
-        /*
+        /**
         Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
         travaillant pendant la rotation de nuit.
         */
@@ -78,7 +82,7 @@ public abstract class LectureBDD {
     public static Tableau presentationServices(Connexion connex)
             throws SQLException
     {
-        /*
+        /**
         Fonction renvoyant le nom, bâtiment, prenom, nom et spécialité du
         directeur de chaque service.
         */
@@ -416,7 +420,7 @@ public abstract class LectureBDD {
             String debutMutuelle)
             throws SQLException
     {
-        /*
+        /**
         Fonction renvoyant la liste des lits occupés dans le batiment par des
         malades dont la mutuelle commence par debutMutuelle
         */
@@ -449,7 +453,7 @@ public abstract class LectureBDD {
     public static ArrayList<ArrayList<String>> docteurByName(Connexion connex,
             String nomDocteur) throws SQLException
     {
-        /*
+        /**
         Fonction qui permet de récupérer une liste de docteurs répondant au nom
         nomDocteur. Renvoit tous les champs de chaque ligne correspondant à ce
         nom.
@@ -470,7 +474,7 @@ public abstract class LectureBDD {
     public static ArrayList<ArrayList<String>> patientByName(Connexion connex,
             String nomPatient) throws SQLException
     {
-        /*
+        /**
         Fonction qui permet de récupérer une liste de patients répondant au nom
         nomPatient. Renvoit tous les champs de chaque ligne correspondant à ce
         nom.
@@ -492,9 +496,9 @@ public abstract class LectureBDD {
     public static int getHighestID(Connexion connex, String table)
             throws SQLException
     {
-        /*
+        /**
         Fonction chargée de détecter et de renvoyer l'ID le plus haut dans une
-        table donnée.
+        table donnée. Cela permet de générer un nouvel ID vierge.
         */
         // 0 Variables
         int retour;
@@ -512,9 +516,12 @@ public abstract class LectureBDD {
     public static void assertSingle(ArrayList<ArrayList<String>> queryResponse)
             throws AmbivalentQueryException, NullQueryException
     {
-        /*
+        /**
         Fonction chargée de vérifier que le résultat renvoyé ne comporte qu'une
-        seule ligne.
+        seule ligne. Génère des exceptions si ce n'est pas le cas
+        * @throws AmbivalentQueryException si le résultat de la query contient 
+        * plus d'un résultat.
+        * @throws NullQueryException si le résultat de la query est vide
         */
         
         if(queryResponse.size() > 1)
