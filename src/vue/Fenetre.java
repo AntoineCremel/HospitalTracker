@@ -147,7 +147,7 @@ public class Fenetre extends JFrame implements ActionListener{
         choix = new JPanel(new GridLayout(15,2,15,15));
         ajout = new JPanel(new GridLayout(15, 2, 15, 15));
         modification = new JPanel(new GridLayout(15,4,15,15));
-        supprimer = new JPanel();
+        supprimer = new JPanel(new GridLayout(15, 2, 15, 15));
         graphe = new JPanel();
         bienvenue = new JPanel();
         
@@ -301,6 +301,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 test = ab.createDemoPanel();
                 graphe.add(test);
                 graphe.repaint();
+                graphe.revalidate();
                
             }
             if(source == graphe2){
@@ -369,6 +370,7 @@ public class Fenetre extends JFrame implements ActionListener{
                             ajout.add(speDocteurUpdate);
                             ajout.add(update1);
                             ajout.repaint();
+                            ajout.revalidate();
                             break;
                         case 1 :
                             break;
