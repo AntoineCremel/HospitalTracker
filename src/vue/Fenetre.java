@@ -16,13 +16,12 @@ import modele.Connexion;
 /**
  * Contient la classe Fenetre qui sert de base à l'interface graphique.
  * Elle se compose de tous les éléments utilisés pour choisir les requêtes de
- * lecture et écriture ainsi que l'affichage des graphes
+ * lecture et écriture ainsi que l'affichage des graphes.
+ * @author Jean
  */
 public class Fenetre extends JFrame implements ActionListener{
     //Objet connexion
     private Connexion connex;
-    
-    private LectureBDD a;
     
     //panneaux utilisés dans la fenetre
     private JPanel bienvenue;
@@ -89,7 +88,7 @@ public class Fenetre extends JFrame implements ActionListener{
     //le tableau de panneaux
     private JTabbedPane onglet;
    
-    //les Strings
+    //les Strings utilisés dans les comboBox
     private String[] tab_choix={"Afficher les patients en fonction de leur mutuelle","Infirmiers de nuit","Presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Nombre de médecins par patient",
         "Rapport entre le nombre d'infirmières et le nombre de malades","Docteurs ayant au moins un malade hospitalisé","Bâtiments avec des malades","Bâtiment avec numéro des chambres et nombre de lits occupés",
         "Chambres avec lits dispo en Cardio","Bâtiment et numéro des chambres vides","Nombre de malades soignés par chaque docteur","Malade avec plus de 3 médecins + nombre de médecins et spé concernées","Caractéristiques du bâtiment B"};
@@ -97,7 +96,15 @@ public class Fenetre extends JFrame implements ActionListener{
     private String[] tab_ajout={"Engager un docteur","Ajouter malade","requête 3"};
     private String[] tab_suppr={"Retirer malade","requête 2","requête 3"};
     
-    // Constructeurs de notre fenêtre
+    /**
+     * Default constructor.
+     * Construit la fenêtre principale de notre programme avec une fenetre divisée en 3
+     * Un panel titre , un panel de commande et un tabbedpane où on affiche les graphes et
+     * demandes pour les modifications de base de donnée
+     * Le constructeur récupère l'Objet connexion de Login
+     * 
+     * @param connex
+     */
     public Fenetre(Connexion connex)
     {
         super();
@@ -159,11 +166,6 @@ public class Fenetre extends JFrame implements ActionListener{
         choixModif = new JComboBox(tab_modif);
         choixSuppr = new JComboBox(tab_suppr);
         
-       
-        
-        
-                    
-    
     //On ajoute les ActionListener pour les boutons et comboBox
         choixRequete.addActionListener(this);
         choixAjout.addActionListener(this);

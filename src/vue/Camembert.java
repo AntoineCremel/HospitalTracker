@@ -24,7 +24,9 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
 /**
- *
+ * Classe récupérée de http://www.java2s.com/Code/Java/Chart/JFreeChartPieChartDemo1.html et modifiée
+ * Cette classe crée un camembert contenant un titre et les informations sur la répartion du nombre
+ * de médecins par spécialité
  * @author Jean
  */
 public class Camembert  {
@@ -42,7 +44,9 @@ public class Camembert  {
     }
 
     /**
-     * Creates a sample dataset.
+     * Creates a sample dataset.On récupère un objet Statistiques qui contient 2 arraylist
+     * avec les spécialités des médecins et le nombre de médecins par spécialité
+     * On crée autant de dataset qu'il y a de spé
      * 
      * @return A sample dataset.
      */
@@ -63,7 +67,7 @@ public class Camembert  {
     }
     
     /**
-     * Creates a chart.
+     * Crée un graphique avec un titre, les dataset et une légende
      * 
      * @param dataset  the dataset.
      * 
@@ -89,7 +93,7 @@ public class Camembert  {
     }
     
     /**
-     * Créer un panel à retourner
+     * Créer un panel à retourner pour pouvoir être affiché
      * 
      * @return A panel.
      */

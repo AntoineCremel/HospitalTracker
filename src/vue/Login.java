@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 import modele.Connexion;
 
 /**
- *
+ * Crée la fenêtre Login qui se compose d'un panel titre et d'un 
+ * tabbedpane qui propose 2 pannels : un pour la connexion en local
+ * et un autre pour la connexion à la BDD ECE
  * @author Jean
  */
 public class Login extends JFrame implements ActionListener{
@@ -51,6 +53,10 @@ public class Login extends JFrame implements ActionListener{
     private JTextField userECE;
     private JPasswordField passECE;
     
+ /**
+ * Constructeur de la fenêtre Login 
+ * @author Jean
+ */
     public Login(){
         super();
         setTitle("HospitalTracker");
