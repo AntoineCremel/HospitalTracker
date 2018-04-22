@@ -164,7 +164,7 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"Nom", "Prenom"};
+        String[] entete = {"Service", "Salaire moyen par service"};
         
         // 1 Composition de la requete
         requete = "SELECT `code_service`,  AVG(salaire) \n" +
