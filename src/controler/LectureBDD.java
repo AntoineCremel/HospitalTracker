@@ -9,7 +9,7 @@ import vue.Tableau;
  *  Classe regroupant toutes les fonctions de lecture de la Base De Données.
  *  Classe abstraite.
  *  
- * @exception Toutes les fonctions de cette classe renvoient des SQLException,
+ *  Toutes les fonctions de cette classe renvoient des SQLException,
  *  qui peuvent se produire dans le cas de mauvaises requêtes.
  * 
  * @author Antoine
