@@ -14,7 +14,7 @@ import javax.swing.JTable;
 /**
  * Classe qui récupère un arraylist contenant toutes les données à afficher, un tableau de String avec l'entete
  * et le nom de la fenêtre
- * Elle hérite de JFrame et crée une fenêtre contenant une JTable avec un scrollpane
+ * Elle hérite de JFrame et crée une fenêtre contenant une JTable avec un JScrollPane
  * @author Jean
  */
 public class Tableau extends JFrame{
