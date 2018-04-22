@@ -56,16 +56,17 @@ public class Camembert  {
         } catch (SQLException ex) {
             Logger.getLogger(Camembert.class.getName()).log(Level.SEVERE, null, ex);
         }
-        docteur = stat.getElement(1);
-        nombre = stat.getElement(0);
-        for(int i=0; i<docteur.size();i++){
+//        docteur = stat.getElement(1);
+//        nombre = stat.getElement(0);
+        for(int i=0; i<stat.size();i++){
+            /*
             double j;
             String test = docteur.get(i);
             String nbr = nombre.get(i);
             j = Double.parseDouble(nbr);
             System.out.println(test);
-            System.out.println(j);
-            dataset.setValue(test,j);
+            System.out.println(j);*/
+            dataset.setValue(stat.getCategorie(i),stat.getNumber(i));
         }
         
         /*dataset.setValue("Two", new Double(10.0));

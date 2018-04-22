@@ -113,7 +113,8 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"Nom", "Prenom"};
+        String[] entete = {"Code du service",
+            "Nombre de lits moyen"};
         
         // 1 Composition de la requete
         requete = "SELECT `code_service`,  AVG(`nb_lits`) \n" +
@@ -295,9 +296,7 @@ public abstract class LectureBDD {
         String requete;
         
         // 1 Composition de la requête
-        requete = "SELECT * FROM `employe` WHERE `nom`=" + nomDocteur +
-                "INNER JOIN `docteur` ON `employe`.`numero` = `docteur`" + 
-                ".`numero`";
+        requete = "SELECT employe.numero FROM docteur INNER JOIN employe ON docteur.numero LIKE employe.numero WHERE employe.nom = \""+nomDocteur+"\"";
         
         // 2 Executioon et récupération du résultat
         tab = connex.remplirChampsRequete(requete);
@@ -319,7 +318,7 @@ public abstract class LectureBDD {
         ArrayList retour;
         
         // 1 Composition de la requête
-        requete = "SELECT * FROM `malade` WHERE `nom`=" + nomPatient;
+        requete = "SELECT * FROM `malade` WHERE `nom`= \"" + nomPatient + "\"";
         
         // 2 Executioon et récupération du résultat
         retour = connex.remplirChampsRequete(requete);

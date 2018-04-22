@@ -21,9 +21,15 @@ public class Statistiques {
         this.categories = new ArrayList();
         this.numbers = new ArrayList();
     }
-    public Statistiques(ArrayList categ, ArrayList nums){
-        this.categories = new ArrayList(categ);
-        this.numbers = new ArrayList(nums);
+    public Statistiques(Statistiques copy){
+        this.categories = new ArrayList();
+        this.numbers = new ArrayList();
+        
+        for(int i=0; i < copy.size(); i++)
+        {
+            this.categories.add(copy.getCategorie(i));
+            this.numbers.add(copy.getNumber(i));
+        }
     }
     
     // Accesseurs en écriture
@@ -63,5 +69,12 @@ public class Statistiques {
         Fonction pour récupérer le chiffre de la case i
         */
         return (int)numbers.get(i);
+    }
+    public int size()
+    {
+        /**
+         * Fonction qui renvoit le nombre d'éléments contenu
+         */
+        return categories.size();
     }
 }
