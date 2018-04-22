@@ -85,15 +85,15 @@ public abstract class EcritureBDD {
         
         // 2 Composition de la requête sur la table employe
         requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel, "
-                + ") VALUES ("+newID+", "+nom+", "+prenom+", "
-                +adresse+", "+tel+")";
+                + ") VALUES (\""+newID+"\", \""+nom+"\", \""+prenom+"\", \""
+                +adresse+"\", \""+tel+"\")\"";
         
         // 3 Ajout du médecin à la table employé
         connex.executeUpdate(requete);
         
         // 4 A présent il faut ajouter le médecin à la table médecin
         connex.executeUpdate("INSERT INTO docteur (numero, sepcialite) "
-            + "VALUES (" + newID + ", " + specialite + ")");
+            + "VALUES (\"" + newID + "\", \"" + specialite + "\")");
     }
     public static void retirerMalade(Connexion connex, String nom)
             throws SQLException, AmbivalentQueryException, NullQueryException
