@@ -84,21 +84,15 @@ public abstract class EcritureBDD {
         newID = LectureBDD.getHighestID(connex, "employe") + 1;
         
         // 2 Composition de la requête sur la table employe
-<<<<<<< HEAD
-        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel "
-                + ") VALUES ("+newID+", "+nom+", "+prenom+", "
-                +adresse+", "+tel+")";
-=======
         requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel, "
                 + ") VALUES (\""+newID+"\", \""+nom+"\", \""+prenom+"\", \""
                 +adresse+"\", \""+tel+"\")\"";
->>>>>>> bb220967650589614dd6010872182dce566ca693
         
         // 3 Ajout du médecin à la table employé
         connex.executeUpdate(requete);
         
         // 4 A présent il faut ajouter le médecin à la table médecin
-        connex.executeUpdate("INSERT INTO docteur (numero, sepcialite) "
+        connex.executeUpdate("INSERT INTO docteur (numero, specialite) "
             + "VALUES (\"" + newID + "\", \"" + specialite + "\")");
     }
     public static void retirerMalade(Connexion connex, String nom)
