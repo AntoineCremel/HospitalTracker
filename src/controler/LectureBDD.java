@@ -277,6 +277,63 @@ public abstract class LectureBDD {
         return tab;
     }
     
+    public static ArrayList<String> listeServices(Connexion connex)
+            throws SQLException
+    {
+        /**
+         * Fonction permettant de récupérer un ArrayList contenant tous les noms 
+         * de service 
+         * 
+         */
+         //0 Variables 
+        ArrayList<String> retour = new ArrayList();
+        ArrayList<ArrayList<String>> lecture;
+        
+        // 1 Recuperation de la liste des services 
+        lecture = new ArrayList<>(
+                connex.remplirChampsRequete("SELECT code FROM service"));
+        
+        // 2 Extraction du résultat
+        for(int i=0; i < lecture.size(); i++)
+            retour.add(lecture.get(i).get(0));
+        
+        return retour;
+    }
+    public static ArrayList listeChambresParService(
+            Connexion connex, String service)
+            throws SQLException
+    {
+        // 0 Variables
+        ArrayList retour = new ArrayList();
+        ArrayList<ArrayList<String>> lecture;
+        
+        // 1 Recuperation de la liste de chambres correspondant au service
+        lecture = new ArrayList<>(
+                connex.remplirChampsRequete("SELECT no_chambre FROM chambre "
+                        + "WHERE code_service = '"+service+"'"));
+        // 2 Extraction du résultat
+        for(int i=0; i < lecture.size(); i++)
+            retour.add(Integer.parseInt(lecture.get(i).get(0)));
+        
+        return retour;
+    }
+    public static int listeLitsLibreParChambre
+        (Connexion connex, int chambre)
+        throws SQLException
+    {
+        // 0 Variables
+        int retour;
+        ArrayList<ArrayList<String>> lecture;
+        
+        // 1 Recuperation de la liste de chambres correspondant au service
+        lecture = new ArrayList<>(
+                connex.remplirChampsRequete("SELECT lit FROM chambre "
+                        + "WHERE no_chambre = '"+chambre+"'"));
+        // 2 Extraction du résultat
+        retour = Integer.parseInt(lecture.get(0).get(0));
+        
+        return retour;
+    }
     /// Support de l'écriture
     /*
     Cette section de la classe contient des méthodes qui fonctionnent en support
