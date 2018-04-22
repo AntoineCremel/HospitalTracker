@@ -90,7 +90,9 @@ public class Fenetre extends JFrame implements ActionListener{
     private JTabbedPane onglet;
    
     //les Strings
-    private String[] tab_choix={"Afficher les patients en fonction de leur mutuelle","infirmiers nuit","presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Infirmiers travaillant de nuit ","Rapport entre le nombre d'infirmières et le nombre de malades","Docteurs ayant au moins un malade hospitalisé","Medecins Sans Malade","Bâtiments avec des malades","bâtiment numéro et nombre des lits","Chambres avec lits dispo en  Cardio","Prénom ,nom des malades soignés par le directeur du service","Bâtiment et numéro des chambres vides","Nombre de malades hospitalisés par chaque docteur","docteurs ayant un malade hospitalisé dans chaque chambre dont l'infirmier surveillant est « Muller »","chaque malade soigné par plus de 3 médecins donne le nombre total de ses médecins ainsi que le nombre correspondant de spécialités médicales concernées.","Caractéristiques du bâtiment B"};
+    private String[] tab_choix={"Afficher les patients en fonction de leur mutuelle","Infirmiers de nuit","Presentation services","Nombre moyen de lits","Salaire moyen des infirmières","Nombre de médecins par patient",
+        "Rapport entre le nombre d'infirmières et le nombre de malades","Docteurs ayant au moins un malade hospitalisé","Bâtiments avec des malades","Bâtiment avec numéro des chambres et nombre de lits occupés",
+        "Chambres avec lits dispo en Cardio","Bâtiment et numéro des chambres vides","Nombre de malades soignés par chaque docteur","Malade avec plus de 3 médecins + nombre de médecins et spé concernées","Caractéristiques du bâtiment B"};
     private String[] tab_modif={"Affecter docteur à malade","requête 2","requête 3"};
     private String[] tab_ajout={"Engager un docteur","Ajouter malade","requête 3"};
     private String[] tab_suppr={"Retirer malade","requête 2","requête 3"};
@@ -315,18 +317,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                     case 9:
-            {
-                try {
-                    Tableau j = LectureBDD.MedecinsSansMalade(connex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            
-            break;
-            
-               case 10:
+               case 8:
             {
                 try {
                     Tableau j = LectureBDD.BatimentMalade(connex);
@@ -335,7 +326,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                      case 11:
+                      case 9:
             {
                 try {
                     Tableau j = LectureBDD.NombreMoyenA(connex);
@@ -344,7 +335,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                      case 12:
+                      case 10:
             {
                 try {
                     Tableau j = LectureBDD.LitCardio(connex);
@@ -353,7 +344,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                      case 13:
+                      case 11:
             {
                 try {
                     Tableau j = LectureBDD.ChambreVide(connex);
@@ -362,7 +353,7 @@ public class Fenetre extends JFrame implements ActionListener{
                 }
             }
                     break;
-                     case 14:
+                     case 12:
             {
                 try {
                     Tableau j = LectureBDD.MaladeParDocteur(connex);
@@ -370,18 +361,8 @@ public class Fenetre extends JFrame implements ActionListener{
                     Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-                    break;
-                     case 16:
-            {
-                try {
-                    Tableau j = LectureBDD.NomInfirmier(connex);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-                    break;
-                    
-                    case 17:
+                    break;                    
+                    case 13:
             {
                 try {
                     Tableau j = LectureBDD.Malade3(connex);
@@ -391,7 +372,7 @@ public class Fenetre extends JFrame implements ActionListener{
             }
                     break;
                     
-                    case 18:
+                    case 14:
             {
                 try {
                     Tableau j = LectureBDD.BatimentB(connex);

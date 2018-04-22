@@ -124,7 +124,7 @@ public abstract class LectureBDD {
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "Le nombre moyen de lits");
+        tab = new Tableau(retour, entete, "Nombre moyen de lits");
         
         return tab;
     }
@@ -147,7 +147,7 @@ public abstract class LectureBDD {
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "rapport entre le nombre d’infirmier(ères) affecté(es) au service et le nombre de\n" +
+        tab = new Tableau(retour, entete, "Rapport entre le nombre d’infirmier(ères) affecté(es) au service et le nombre de\n" +
 "malades hospitalisés dans le service ");
         
         return tab;
@@ -190,14 +190,14 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"Nom", "Prenom"};
+        String[] entete = {"Nom", "Prenom", "nombre soignants","nombre spécialités"};
         
         // 1 Composition de la requete
-        requete = "select a.nom, a.prenom, count(*) as nb_soignants, count(distinct s.specialite) as nb_specialites from docteur s, soigne so, malade a where s.numero = so.no_docteur and so.no_malade = a.numero group by a.nom, a.prenom having count(*) > 3";
+        requete = "select a.nom, a.prenom, count(*) as nb_soignants, count(distinct s.specialite) as nb_specialites from docteur s, soigne so, malade a where s.numero = so.no_docteur and so.no_malade = a.numero group by a.nom, a.prenom ";
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "Infirmiers travaillant de nuit");
+        tab = new Tableau(retour, entete, "Nombre de médecins et spécialités par patient");
         
         return tab;
     }
@@ -222,30 +222,7 @@ public abstract class LectureBDD {
         tab = new Tableau(retour, entete, "Prénom et nom des docteurs ayant au moins un malade hospitalisé.");
         
         return tab;
-    }
-    public static Tableau MedecinsSansMalade(Connexion connex)
-            throws SQLException
-    {
-        /*
-        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
-        travaillant pendant la rotation de nuit.
-        */
-        // 0 Variables
-        ArrayList<ArrayList<String>> retour;
-        Tableau tab;
-        String requete;
-        String[] entete = {"Nom", "Prenom"};
-        
-        // 1 Composition de la requete
-        requete = "select prenom, nom from employe where numero in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )";
-        
-        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
-        
-        tab = new Tableau(retour, entete, "Prénom et nom des docteurs ayant au moins un malade hospitalisé.");
-        
-        return tab;
-    }
-         
+    }     
     
     public static Tableau BatimentMalade(Connexion connex)
             throws SQLException
@@ -267,7 +244,7 @@ public abstract class LectureBDD {
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "Bâtiment et numéro des chambres occupées par au moins un malad");
+        tab = new Tableau(retour, entete, "Bâtiment et numéro des chambres occupées par au moins un malade");
         
         return tab;
     }
@@ -283,14 +260,14 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"Batiment", "Numéro de chambre"};
+        String[] entete = {"Batiment", "Numéro de chambre", "nombre de lites occupés"};
         
         // 1 Composition de la requete
         requete = "  select    s.batiment, c.no_chambre, c.nb_lits, count(*) as nb_lits_occupes from      service s, chambre c, hospitalisation h where     s.code = c.code_service and       c.code_service = h.code_service and       c.no_chambre = h.no_chambre group by  s.batiment, c.no_chambre, c.nb_lits union select    s.batiment, c.no_chambre, c.nb_lits, 0 as nb_lits_occupes from      service s, chambre c where     s.code = c.code_service and       (c.code_service, c.no_chambre) not in (           select  code_service, no_chambre           from    hospitalisation )  ;";
         
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
-        tab = new Tableau(retour, entete, "le bâtiment, le numéro   et le nombre des lits occupés par les malades qui y sont hospitalisés");
+        tab = new Tableau(retour, entete, "Bâtiment, numéro et nombre de lits occupés par les malades qui y sont hospitalisés");
         
         return tab;
     }
@@ -375,7 +352,7 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"prenom", "nom"};
+        String[] entete = {"prenom", "nom","nombre"};
         
         // 1 Composition de la requete
         requete = "select e.prenom, e.nom, count(*) as nb_hospitalisations from employe e, soigne s, hospitalisation h where e.numero = s.no_docteur and s.no_malade = h.no_malade group by e.nom, e.prenom union all select prenom, nom, 0 as nb_hospitalisations from employe where numero in ( select numero from docteur )and numero not in ( select no_docteur from soigne where no_malade in ( select no_malade from hospitalisation ) )";
@@ -383,29 +360,6 @@ public abstract class LectureBDD {
         retour = new ArrayList<>(connex.remplirChampsRequete(requete));
         
         tab = new Tableau(retour, entete, "Nombre de malades hospitalisés par chaque docteur");
-        
-        return tab;
-    }
-    
-    public static Tableau NomInfirmier(Connexion connex)
-            throws SQLException
-    {
-        /*
-        Fonction renvoyant la liste des noms et prénoms de tous les infirmiers
-        travaillant pendant la rotation de nuit.
-        */
-        // 0 Variables
-        ArrayList<ArrayList<String>> retour;
-        Tableau tab;
-        String requete;
-        String[] entete = {"prenom", "nom"};
-        
-        // 1 Composition de la requete
-        requete = "              select prenom, nom from employe where numero in ( select numero from docteur d where not exists ( select * from chambre c where surveillant in ( select numero from employe where nom = 'Muller' ) and not exists ( select * from soigne so, hospitalisation h where d.numero = so.no_docteur and so.no_malade = h.no_malade and h.code_service = c.code_service and h.no_chambre = c.no_chambre ) ) )";
-        
-        retour = new ArrayList<>(connex.remplirChampsRequete(requete));
-        
-        tab = new Tableau(retour, entete, "Prénom et nom des docteurs ayant un malade hospitalisé dans chaque chambre dont l'infirmier surveillant est « Muller ».");
         
         return tab;
     }
@@ -420,7 +374,7 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"prenom", "nom"};
+        String[] entete = {"prenom", "nom","nombre médecins","nombre spécialités concernées"};
         
         // 1 Composition de la requete
         requete = " select    m.nom, m.prenom, count(*) as nb_soignants,           count(distinct d.specialite) as nb_specialites from      docteur d, soigne so, malade m where     d.numero = so.no_docteur and       so.no_malade = m.numero group by  m.nom, m.prenom having    count(*) > 3 ;";
@@ -443,7 +397,7 @@ public abstract class LectureBDD {
         ArrayList<ArrayList<String>> retour;
         Tableau tab;
         String requete;
-        String[] entete = {"batiment", "numero chambre"};
+        String[] entete = {"no_chambre", "lits","nom service","prenom du malade","nom du malade","malade mutuelle"};
         
         // 1 Composition de la requete
         requete = "select    h.no_chambre, h.lit, s.nom, m.prenom, m.nom, m.mutuelle from      service s, hospitalisation h, malade m where     s.batiment = 'B'and       s.code = h.code_service and       h.no_malade = m.numero and       m.mutuelle like 'MN%' ;\n" +
