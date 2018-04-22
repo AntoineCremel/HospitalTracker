@@ -84,16 +84,16 @@ public abstract class EcritureBDD {
         newID = LectureBDD.getHighestID(connex, "employe") + 1;
         
         // 2 Composition de la requête sur la table employe
-        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel, "
-                + ") VALUES ('"+newID+"', '"+nom+"', '"+prenom+"', '"
+        requete = "INSERT INTO employe (numero, nom, prenom, adresse, tel"
+                + ") VALUES ("+newID+", '"+nom+"', '"+prenom+"', '"
                 +adresse+"', '"+tel+"')";
         
         // 3 Ajout du médecin à la table employé
         connex.executeUpdate(requete);
         
         // 4 A présent il faut ajouter le médecin à la table médecin
-        connex.executeUpdate("INSERT INTO docteur (numero, sepcialite) "
-            + "VALUES ('" + newID + "', '" + specialite + "')");
+        connex.executeUpdate("INSERT INTO docteur (numero, specialite) "
+            + "VALUES (" + newID + ", '" + specialite + "')");
     }
     public static void retirerMalade(Connexion connex, String nom)
             throws SQLException, AmbivalentQueryException, NullQueryException
@@ -117,8 +117,8 @@ public abstract class EcritureBDD {
         patientID = Integer.parseInt(lecture.get(0).get(0));
         
         // 2 Génération de la requête d'effaçage
-        requete = "DELETE FROM hospitalisation WHERE no_malade = \""
-                + patientID + "\"";
+        requete = "DELETE FROM hospitalisation WHERE no_malade = "
+                + patientID;
         
         // 3 Execution de la requete
         connex.executeUpdate(requete);
