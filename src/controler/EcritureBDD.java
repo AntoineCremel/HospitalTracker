@@ -28,7 +28,7 @@ public abstract class EcritureBDD {
         String requete;
         // 1 Composition de la requete d'écriture
         requete = "INSERT INTO soigne (no_docteur, no_malade)" +
-                "VALUES(" + IDDocteur + ", " + IDMalade + ")";
+                "VALUES(\"" + IDDocteur + "\", \"" + IDMalade + "\")";
         // 2 Execution de la requête
         connex.executeUpdate(requete);
     }
@@ -117,8 +117,8 @@ public abstract class EcritureBDD {
         patientID = Integer.parseInt(lecture.get(0).get(0));
         
         // 2 Génération de la requête d'effaçage
-        requete = "DELETE FROM hospitalisation WHERE no_malade = "
-                + patientID;
+        requete = "DELETE FROM hospitalisation WHERE no_malade = \""
+                + patientID + "\"";
         
         // 3 Execution de la requete
         connex.executeUpdate(requete);
