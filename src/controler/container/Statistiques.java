@@ -13,9 +13,9 @@ public class Statistiques {
     // Variables
     // Categories contient une liste de Strings qui contiennent les noms des
     // catégories des chiffres contenus dans numbets
-    private List categories;
+    private final List categories;
     // Numbers contient les données numériques de l'élément.
-    private List numbers;
+    private final List numbers;
     
     public Statistiques(){
         this.categories = new ArrayList();

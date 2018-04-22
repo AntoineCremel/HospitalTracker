@@ -16,13 +16,13 @@ public abstract class EcritureBDD {
             int IDMalade)
             throws SQLException
     {
-        /*
+        /**
         Fonction utilisée pour affecter un docteur à un patient.
-        Paramètres :
-            - connex : Instances de la classe connexion qui est connectée à la 
+        
+         @param connex Instances de la classe connexion qui est connectée à la 
             base de donnée correspondante.
-            - IDDocteur : ID du docteur dans la base de donnée
-            - IDPatient : ID du patient dans la base de donnée
+         @param IDDocteur : ID du docteur dans la base de donnée
+         @param IDPatient : ID du patient dans la base de donnée
         */
         // 0 Variables
         String requete;
@@ -36,13 +36,13 @@ public abstract class EcritureBDD {
             String nomPatient)
             throws SQLException, AmbivalentQueryException, NullQueryException
     {
-        /*
+        /**
         Fonction utilisée pour affecter un docteur à un patient.
-        Paramètres :
-            - connex : Instances de la classe connexion qui est connectée à la 
+        * 
+           @param connex : Instances de la classe connexion qui est connectée à la 
             base de donnée correspondante.
-            - nomDocteur : nom du docteur dans la base de donnée
-            - nomPatient : nom du patient dans la base de donnée
+           @param nomDocteur : nom du docteur dans la base de donnée
+           @param nomPatient : nom du patient dans la base de donnée
         ///ATTENTION
         Il faut que le nom corresponde exactement. La fonction est case
         sensitive et ne fait pas d'auto correct
@@ -71,7 +71,7 @@ public abstract class EcritureBDD {
             String prenom, String tel, String adresse, String specialite)
             throws SQLException
     {
-        /*
+        /**
         Fonction utilisée pour ajouter un docteur à la base de données.
         Reçoit en paramètre toutes les informations d'un médecin dans la base
         de données.
@@ -98,7 +98,7 @@ public abstract class EcritureBDD {
     public static void retirerMalade(Connexion connex, String nom)
             throws SQLException, AmbivalentQueryException, NullQueryException
     {
-        /*
+        /**
         Méthode qui sert à retirer un malade de la liste des hospitatlisations.
         Le malade sera gardé dans la liste des malades, afin de permettre à l'
         hopital de garder une liste des patients qui ont été hospitatlisés chez
